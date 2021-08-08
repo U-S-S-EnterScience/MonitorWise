@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Monitor Wise</string>
+    <string name="email">E-Mail</string>
+    <string name="password">Senha</string>
+    <string name="login">Entrar</string>
+    <string name="changePassword">Esqueceu a senha?</string>
+    <string name="signUp">Cadastre-se</string>
+    <string name="afHintEmail">seuemail@exemplo.com</string>
+    <string name="afHintPassword">Sua Senha</string>
+    <string name="passwordConfirm">Senha Novamente</string>
+    <string name="register">Cadastro</string>
+    <string name="afHintCourse">Seleciona seu Curso</string>
+    <string name="course">Selecione um curso...</string>
+    <string name="choseCourse">Escolha seu curso: </string>
+    <string name="period">Período: </string>
+    <string name="morning">Matutino</string>
+    <string name="afternoon">Vespertino</string>
+    <string name="night">Noturno</string>
+    <string name="doLogin">Fazer Login</string>
+</resources>
