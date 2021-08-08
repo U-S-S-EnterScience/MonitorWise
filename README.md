@@ -1,2 +1,2 @@
 # MonitorWise
-Sistema mobile para Gestão de horas de monitores
+Sistema mobile para Gestão de horas de monitores.
