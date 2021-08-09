@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/calendar"
+            android:icon="@drawable/ic_baseline_schedule_24"
+            android:title="@string/calendar" />
+        <item
+            android:id="@+id/monitor"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="@string/monitor" />
+        <item
+            android:id="@+id/report"
+            android:icon="@drawable/ic_baseline_library_books_24"
+            android:title="@string/report" />
+
+    </group>
+
+</menu>
