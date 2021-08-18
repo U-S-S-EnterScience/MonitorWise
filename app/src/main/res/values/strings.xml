@@ -24,4 +24,6 @@
     <string name="name">Usuário que esta logado</string>
     <string name="priority">Prioridade</string>
     <string name="siginAs">Entrou como:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
