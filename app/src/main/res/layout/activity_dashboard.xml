@@ -68,13 +68,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-
     <FrameLayout
-        android:layout_marginTop="65dp"
+        android:id="@+id/fragment_content"
         android:layout_width="match_parent"
         android:layout_height="600dp"
-        android:id="@+id/fragment_content"/>
+        android:layout_marginTop="65dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"

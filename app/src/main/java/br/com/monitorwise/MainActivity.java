@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import br.com.monitorwise.Dashboard.DashboardActivity;
+import br.com.monitorwise.Monitor.MonitorActivity;
 
 import static br.com.monitorwise.RegisterActivity.hideKeyboardFrom;
 
