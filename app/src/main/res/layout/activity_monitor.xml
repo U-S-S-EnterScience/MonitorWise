@@ -95,35 +95,65 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_view_discipline">
 
-            <LinearLayout
-                android:id="@+id/constraint_layout_student"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/text_view_student_presence"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:text="@string/Presence"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <ListView
-                    android:id="@+id/list_view_student"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_layout_student"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:choiceMode="multipleChoice" />
+                    android:layout_height="wrap_content">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/text_view_student_presence"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:text="@string/Presence"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/image_view_search_student"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/ic_baseline_search_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_view_student_presence"
+                        app:layout_constraintStart_toEndOf="@+id/text_view_student_presence"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_student_presence" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Procurar Aluno(a)"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_view_student_presence"
+                        app:layout_constraintStart_toEndOf="@+id/image_view_search_student"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_student_presence" />
+
+                    <ListView
+                        android:id="@+id/list_view_student"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:choiceMode="multipleChoice"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_student_presence" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
         </androidx.cardview.widget.CardView>
 
 

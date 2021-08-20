@@ -24,6 +24,12 @@ public class DashboardActivity extends AppCompatActivity {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav);
 
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.add(R.id.fragment_content, new FirstFragment());
+        fragmentTransaction.commit();
+
         // Bottom Navigation Menu test
         bottomNavigationView.setOnItemSelectedListener(item -> {
 
@@ -34,19 +40,14 @@ public class DashboardActivity extends AppCompatActivity {
                case R.id.calendarFragment:
                    ft.replace(R.id.fragment_content, new FirstFragment());
                    ft.commit();
-                   Toast.makeText(this, "Exibe as informações do monitor", Toast.LENGTH_SHORT).show();
-                   Toast.makeText(this, "Exibe o calendario", Toast.LENGTH_SHORT).show();
                    break;
 
                case R.id.monitorFragment:
-                   ft = fm.beginTransaction();
                    ft.replace(R.id.fragment_content, new SecondFragment());
                    ft.commit();
-                   Toast.makeText(this, "Exibe as informações do monitor", Toast.LENGTH_SHORT).show();
                    break;
 
                case R.id.historicFragment:
-                   ft = fm.beginTransaction();
                    ft.replace(R.id.fragment_content, new ThirdFragment());
                    ft.commit();
 

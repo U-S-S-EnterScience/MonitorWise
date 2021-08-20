@@ -38,6 +38,6 @@
     <string name="buttonReport">Enviar Relatório</string>
     <string name="addButton">add Button</string>
     <string name="sendReport">Relatório Enviado com Sucesso</string>
-    <string name="HistoricTitle">Histórico de </string>
+    <string name="HistoricTitle">Histórico</string>
     <string name="monthHour">"Horas Mensais: "</string>
 </resources>
