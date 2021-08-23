@@ -24,7 +24,6 @@
     <string name="name">Usuário que esta logado</string>
     <string name="priority">Prioridade</string>
     <string name="siginAs">Entrou como:</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="myTutor">Minhas Monitorias: </string>
     <string name="Management">Gerenciamento: </string>
@@ -40,4 +39,7 @@
     <string name="sendReport">Relatório Enviado com Sucesso</string>
     <string name="HistoricTitle">Histórico</string>
     <string name="monthHour">"Horas Mensais: "</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>
