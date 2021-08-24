@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg_color"
     tools:context=".Dashboard.DashboardActivity">
 
 
@@ -15,7 +15,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/white"
+        android:background="@drawable/bg_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -43,6 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:textColor="?attr/colorSecondary"
                     android:layout_weight="0.40"
                     android:text="@string/name"
                     android:textSize="14sp"
@@ -51,6 +52,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#65B3CF"
+                    android:textStyle="bold"
                     android:layout_weight="0.25"
                     android:text="@string/siginAs" />
 
@@ -58,6 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
+                    android:textColor="?attr/colorSecondaryVariant"
                     android:text="@string/priority"
                     android:textSize="14sp"
                     android:textStyle="bold" />
