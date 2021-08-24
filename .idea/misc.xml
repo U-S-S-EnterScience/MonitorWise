@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/desktop/MonitorWise/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/desktop/MonitorWise/app/src/main/res/drawable/bc_item.xml" value="0.2703125" />
+        <entry key="..\:/desktop/MonitorWise/app/src/main/res/drawable/bg_color.xml" value="0.2703125" />
+        <entry key="..\:/desktop/MonitorWise/app/src/main/res/drawable/bt_background.xml" value="0.2703125" />
         <entry key="..\:/desktop/MonitorWise/app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.2703125" />
         <entry key="..\:/desktop/MonitorWise/app/src/main/res/drawable/ic_baseline_library_books_24.xml" value="0.2703125" />
         <entry key="..\:/desktop/MonitorWise/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2703125" />
@@ -18,6 +21,8 @@
         <entry key="..\:/desktop/MonitorWise/app/src/main/res/layout/activity_monitor.xml" value="0.25416666666666665" />
         <entry key="..\:/desktop/MonitorWise/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
         <entry key="..\:/desktop/MonitorWise/app/src/main/res/layout/activity_splash.xml" value="0.24010416666666667" />
+        <entry key="..\:/desktop/MonitorWise/app/src/main/res/layout/bt_background.xml" value="0.25416666666666665" />
+        <entry key="..\:/desktop/MonitorWise/app/src/main/res/layout/bt_shape.xml" value="0.25416666666666665" />
         <entry key="..\:/desktop/MonitorWise/app/src/main/res/layout/first_fragment.xml" value="0.25416666666666665" />
         <entry key="..\:/desktop/MonitorWise/app/src/main/res/layout/fragment_historic.xml" value="0.25025641025641027" />
         <entry key="..\:/desktop/MonitorWise/app/src/main/res/layout/fragment_monitor.xml" value="0.25025641025641027" />
@@ -27,6 +32,8 @@
         <entry key="..\:/desktop/MonitorWise/app/src/main/res/layout/second_fragment.xml" value="0.25416666666666665" />
         <entry key="..\:/desktop/MonitorWise/app/src/main/res/layout/third_fragment.xml" value="0.25416666666666665" />
         <entry key="..\:/desktop/MonitorWise/app/src/main/res/menu/bottom_nav.xml" value="0.25025641025641027" />
+        <entry key="..\:/desktop/MonitorWise/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2703125" />
+        <entry key="..\:/desktop/MonitorWise/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2703125" />
       </map>
     </option>
   </component>
