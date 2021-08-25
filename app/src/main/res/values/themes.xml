@@ -11,16 +11,20 @@
         <item name="colorOnSecondary">#0000EE</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Navigation Bar Color-->
+        <item name="android:navigationBarColor">@color/black</item>
         <!-- Customize your theme here. -->
-        <item name="windowActionBar">false</item>
+        <item name="windowActionBar">true</item>
     </style>
 
 
     <!-- Estilo de Títulos -->
     <style name="text_view_title">
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">30sp</item>
-        <item name="android:textColor">?attr/colorSecondary</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:layout_marginStart">15dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textColor">?attr/colorSecondaryVariant</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
     </style>
@@ -31,8 +35,9 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textColor">?attr/colorSecondary</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginStart">15dp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_marginTop">40dp</item>
     </style>
 
 
@@ -88,18 +93,4 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-
-    <!-- Estilo da splash screen-->
-
-    <style name="ThemeOverlay.MonitorWise.FullscreenContainer" parent="">
-        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
-        <item name="fullscreenTextColor">@color/light_blue_A200</item>
-    </style>
-
-    <style name="Theme.MonitorWise.Fullscreen" parent="Theme.MonitorWise">
-        <item name="android:actionBarStyle">@style/Widget.Theme.MonitorWise.ActionBar.Fullscreen
-        </item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
-    </style>
 </resources>

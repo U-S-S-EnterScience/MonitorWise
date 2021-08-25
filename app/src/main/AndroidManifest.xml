@@ -14,7 +14,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/app_name_2"
-            android:theme="@style/Theme.MonitorWise.Fullscreen">
+            android:theme="@style/Theme.MonitorWise">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#4472C4"
-    android:theme="@style/ThemeOverlay.MonitorWise.FullscreenContainer"
     tools:context=".SplashActivity">
 
    <ImageView

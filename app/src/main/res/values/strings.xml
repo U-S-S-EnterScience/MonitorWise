@@ -43,4 +43,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="app_name_2">Mt. Wise</string>
+    <string name="Hour">Horário: %1$s</string>
+    <string name="date">Data: %1$s</string>
+    <string name="local">Local: %1$s</string>
 </resources>

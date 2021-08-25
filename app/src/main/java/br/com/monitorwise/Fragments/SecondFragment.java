@@ -1,6 +1,6 @@
 package br.com.monitorwise.Fragments;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,8 +11,17 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import br.com.monitorwise.Dashboard.DashboardActivity;
+import com.xwray.groupie.GroupAdapter;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.monitorwise.Model.CalendarItem;
+import br.com.monitorwise.Model.MonitorItem;
 import br.com.monitorwise.Monitor.MonitorActivity;
 import br.com.monitorwise.R;
 
@@ -22,7 +31,7 @@ import br.com.monitorwise.R;
  */
 public class SecondFragment extends Fragment {
 
-
+    private GroupAdapter adapter;
 
     @Nullable
     @Override
@@ -33,15 +42,29 @@ public class SecondFragment extends Fragment {
 
         Button btCreateReport = fragmentMonitor.findViewById(R.id.button_create_report);
 
-        btCreateReport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), MonitorActivity.class));
-            }
-        });
+        RecyclerView rvMonitorDisciplines = fragmentMonitor.findViewById(R.id.recycler_view_monitor_monitories);
+
+
+        adapter = new GroupAdapter();
+        rvMonitorDisciplines.setAdapter(adapter);
+        rvMonitorDisciplines.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        populateDisciplines();
+
+        btCreateReport.setOnClickListener(v -> startActivity(new Intent(getContext(), MonitorActivity.class)));
 
         return fragmentMonitor;
 
+    }
+
+    private void populateDisciplines(){
+        List<MonitorItem> monitorItem = new ArrayList<>();
+
+        monitorItem.add(new MonitorItem("Algoritmo", "Terça-Feira", "18:00h - 19:00h", "Sala 7"));
+        monitorItem.add(new MonitorItem("Programação em Microinformática", "Segunda-Feira", "18:00h - 18:30h", "Sala 9"));
+
+        adapter.addAll(monitorItem);
+        adapter.notifyDataSetChanged();
     }
 
 }

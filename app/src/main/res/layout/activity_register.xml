@@ -4,17 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_light"
     tools:context=".RegisterActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/bg_color"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
 
         <TextView
@@ -51,6 +46,7 @@
             android:id="@+id/text_view_period"
             style="@style/text_view_subtitle"
             android:text="@string/period"
+            android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="@id/check_box_morning"
             app:layout_constraintTop_toBottomOf="@+id/list_view_course" />
 

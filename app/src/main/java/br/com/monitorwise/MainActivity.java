@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         EditText edtEmail = findViewById(R.id.edit_text_login);
         CheckBox cbShowPassword = findViewById(R.id.check_box_show_password_login);
 
-
         // Quando clica na check box mostra e esconde a senha
         cbShowPassword.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(isChecked){
