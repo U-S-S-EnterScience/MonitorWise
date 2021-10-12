@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".screen.user.login.LoginActivity">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/button_background"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/margin_big">
+
+                <include
+                    android:id="@+id/include_image_login"
+                    layout="@layout/app_image" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/margin_big"
+                    android:layout_marginBottom="@dimen/margin_default_minimum"
+                    android:text="@string/login"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/background_white_rounded" />
+
+                <include
+                    android:id="@+id/include_content_login"
+                    layout="@layout/content_user_login" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </ScrollView>
+</layout>

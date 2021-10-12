@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="listener"
+            type="com.example.monitorwise.screen.user.register.RegisterActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/edt_login_register"
+            style="@style/edit_text_login_fields"
+            android:layout_marginTop="@dimen/margin_big"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_login_register">
+
+            <include
+                android:id="@+id/include_content_course_choose"
+                layout="@layout/content_course_choose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_default_minimum" />
+
+            <include
+                android:id="@+id/include_content_discipline_choose"
+                layout="@layout/content_discipline_chose" />
+
+            <include
+                android:id="@+id/include_content_course_turn"
+                layout="@layout/content_course_turn" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edt_password_register"
+            style="@style/edit_text_login_fields"
+            android:layout_marginTop="@dimen/margin_big"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linear_layout" />
+
+        <EditText
+            android:id="@+id/edt_password_confirm"
+            style="@style/edit_text_login_fields"
+            android:layout_marginTop="@dimen/margin_default"
+            android:hint="@string/passwordConfirm"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_password_register" />
+
+        <CheckBox
+            android:id="@+id/check_box_show_password_register"
+            style="@style/check_box_show_password"
+            android:layout_marginTop="@dimen/margin_default_minimum"
+            app:layout_constraintStart_toStartOf="@+id/edt_password_confirm"
+            app:layout_constraintTop_toBottomOf="@+id/edt_password_confirm" />
+
+        <Button
+            android:id="@+id/btn_register"
+            style="@style/button_style"
+            android:layout_marginTop="@dimen/margin_large_extra"
+            android:layout_marginBottom="@dimen/margin_big_extra"
+            android:onClick="@{listener::onClick}"
+            android:text="@string/register"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/check_box_show_password_register" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_default_minimum"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_register"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_register"
+            tools:visibility="invisible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

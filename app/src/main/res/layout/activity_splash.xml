@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/button_background"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".screen.splash.SplashActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default_minimum"
+        android:layout_marginEnd="@dimen/margin_default_minimum"
+        android:layout_marginBottom="@dimen/margin_micro_large"
+        android:text="@string/app_name_monitor"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="48sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/fullscreen_content"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin_super"
+            android:layout_marginEnd="@dimen/margin_super"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter"
+            android:src="@drawable/app_background_image" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default_minimum"
+        android:layout_marginTop="@dimen/margin_default_minimum"
+        android:layout_marginEnd="@dimen/margin_default_minimum"
+        android:layout_marginBottom="@dimen/margin_big"
+        android:text="@string/app_name_wise"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="48sp" />
+
+</LinearLayout>

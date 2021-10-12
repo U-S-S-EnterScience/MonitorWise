@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_calendar"
+        android:icon="@drawable/ic_baseline_access_time_24"
+        android:title="@string/calendar" />
+
+    <item
+        android:id="@+id/menu_monitor"
+        android:icon="@drawable/ic_baseline_person_outline_24"
+        android:title="@string/app_name_monitor" />
+
+    <item
+        android:id="@+id/menu_historic"
+        android:icon="@drawable/ic_baseline_assignment_24"
+        android:title="@string/historic" />
+
+</menu>
