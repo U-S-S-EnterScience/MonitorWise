@@ -92,7 +92,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 } else {
                     Toast.makeText(
                             LoginActivity.this,
-                            "Insira e-mail e/ou senha",
+                            "Campos obrigatórios não preenchidos, favor inseri-los.",
                             Toast.LENGTH_SHORT).show();
                     mUserLoginFieldsBinding.progressBar.setVisibility(View.INVISIBLE);
                     mUserLoginFieldsBinding.btnLogin.setVisibility(View.VISIBLE);
