@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MonitorWise">
         <activity
+            android:name=".screen.monitor.activity.MonitorActivity"
+            android:exported="true" />
+        <activity
             android:name=".screen.home.HomeActivity"
             android:exported="true" />
         <activity
@@ -24,7 +27,7 @@
             android:name=".screen.splash.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
-            android:label="@string/title_activity_splash"
+            android:label="@string/app_name"
             android:theme="@style/Theme.MonitorWise.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
