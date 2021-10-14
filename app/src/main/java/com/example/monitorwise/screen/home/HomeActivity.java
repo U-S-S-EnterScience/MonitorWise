@@ -42,14 +42,6 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         onInitView();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-
-
-    }
-
     private void onInitView() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         mAuth = FirebaseAuth.getInstance();
@@ -94,7 +86,6 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                             LoginActivity.class)
                     );
                     break;
-
             }
 
             return true;
