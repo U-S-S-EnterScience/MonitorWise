@@ -15,4 +15,5 @@
     <color name="button_background">#4472C4</color>
     <color name="light_gray">#F6F5F5</color>
     <color name="accent">#00B9F6</color>
+    <color name="dark_gray">#656565</color>
 </resources>

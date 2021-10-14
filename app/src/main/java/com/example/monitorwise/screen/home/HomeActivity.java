@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.monitorwise.BuildConfig;
@@ -46,8 +47,13 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
         mBinding.includeToolbar.toolbar.setTitle("");
 
+        mBinding.includeToolbar.toolbar.setNavigationOnClickListener(view -> {
+            Toast.makeText(this, "teste", Toast.LENGTH_SHORT).show();
+        });
+
         initNavigationBottom();
     }
+
 
     private void initNavigationBottom() {
         mBinding.navigationBottom.setOnItemSelectedListener(item -> {
@@ -75,6 +81,5 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
             return true;
         });
     }
-
 
 }
