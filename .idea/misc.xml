@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/Documents/MeusProjetos/MonitorWise/app/src/main/res/layout/activity_home.xml" value="0.33" />
+        <entry key="..\:/Users/User/Documents/MeusProjetos/MonitorWise/app/src/main/res/layout/appbar_and_toolbar.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/User/Documents/MeusProjetos/MonitorWise/app/src/main/res/layout/fragment_calendar.xml" value="0.20520833333333333" />
         <entry key="..\:/lucas/desktop/Fatec/PI/app/MonitorWise/app/src/main/res/drawable/border_white.xml" value="0.2755208333333333" />
         <entry key="..\:/lucas/desktop/Fatec/PI/app/MonitorWise/app/src/main/res/drawable/btn_background.xml" value="0.2755208333333333" />
         <entry key="..\:/lucas/desktop/Fatec/PI/app/MonitorWise/app/src/main/res/drawable/btn_item_background.xml" value="0.381025641025641" />
