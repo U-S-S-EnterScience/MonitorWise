@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "715243159967",
+    "project_id": "monitorwise",
+    "storage_bucket": "monitorwise.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715243159967:android:fc44f5a6a55cf32dd3bdaa",
+        "android_client_info": {
+          "package_name": "com.example.monitorwise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715243159967-l4ehk9eqfu0v8pjqu5sichbpklatt38c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDguRP_rO5149L1t_6hzZV6AiGF0R8EWf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "715243159967-l4ehk9eqfu0v8pjqu5sichbpklatt38c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,14 +17,18 @@ import com.example.monitorwise.R;
 import com.example.monitorwise.base.BaseActivity;
 import com.example.monitorwise.databinding.ActivityHomeBinding;
 import com.example.monitorwise.screen.calendar.CalendarFragment;
+import com.example.monitorwise.screen.user.login.LoginActivity;
 import com.example.monitorwise.util.Constants;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Calendar;
 
 public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     private ActivityHomeBinding mBinding;
+    private FirebaseAuth mAuth;
 
     private static final String CALENDAR_TAG = "calendar";
     private static final String MONITOR_TAG = "monitor";
@@ -37,8 +42,17 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         onInitView();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+
+    }
+
     private void onInitView() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        mAuth = FirebaseAuth.getInstance();
 
         this.setUpAppBarToolbar(mBinding.includeToolbar.toolbar, mBinding.includeToolbar.appbar);
         this.showDisplayHomeAsUpEnable(true);
@@ -74,6 +88,11 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                     break;
 
                 case R.id.menu_historic:
+                    mAuth.signOut();
+                    startActivity(new Intent(
+                            HomeActivity.this,
+                            LoginActivity.class)
+                    );
                     break;
 
             }
