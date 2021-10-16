@@ -1,6 +1,7 @@
 package com.example.monitorwise.screen.home;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
@@ -8,9 +9,13 @@ import androidx.fragment.app.Fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,6 +45,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     private CodeScanner mCodeScanner;
     boolean CameraPermission = false;
+    boolean CodeScannerStatus = false;
     final int CAMERA_PERM = 1;
 
     @Override
@@ -60,10 +66,21 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         mCodeScanner = new CodeScanner(this,scannerView);
+        askPermission();
 
         mBinding.includeToolbar.toolbar.setNavigationOnClickListener(view -> {
-            Toast.makeText(this, "teste", Toast.LENGTH_SHORT).show();
-            mCodeScanner.startPreview();
+            //Toast.makeText(this, "teste", Toast.LENGTH_SHORT).show();
+            if(!CodeScannerStatus){
+                CodeScannerStatus = true;
+                scannerView.setVisibility(View.VISIBLE);
+                mCodeScanner.startPreview();
+            }else{
+                CodeScannerStatus = false;
+                mCodeScanner.releaseResources();
+                scannerView.setVisibility(View.GONE);
+            }
+
+
         });
 
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
@@ -72,7 +89,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
+                        //Resultado ao ler QRCode
                     }
                 });
             }
@@ -125,7 +142,46 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
         if(requestCode == CAMERA_PERM){
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-
+                mCodeScanner.startPreview();
+                CameraPermission = true;
+            }
+        }else{
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.CAMERA)){
+                new AlertDialog.Builder(this)
+                        .setTitle("Permissão")
+                        .setMessage("Por favor, autorize a permissão de câmera para utilizar todas as funções da aplicação")
+                        .setPositiveButton("Prosseguir", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.CAMERA},CAMERA_PERM);
+                            }
+                        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create().show();
+            }else{
+                new AlertDialog.Builder(this)
+                        .setTitle("Permissão")
+                        .setMessage("Permissões necessárias foram negadas pelo administrador. Atualize as permissões em [Configurações] > [Permissões] ")
+                        .setPositiveButton("Configurações", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                        Uri.fromParts("package", getPackageName(),null));
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }).setNegativeButton("Sair da aplicação", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        finish();
+                    }
+                }).create().show();
             }
         }
 
@@ -134,7 +190,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     @Override
     protected void onPause() {
-        mCodeScanner.releaseResources();
+        if(CameraPermission){
+            mCodeScanner.releaseResources();
+        }
         super.onPause();
     }
 }
