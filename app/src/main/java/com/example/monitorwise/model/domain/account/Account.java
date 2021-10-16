@@ -10,13 +10,14 @@ public class Account {
     private String period;
     private String course;
 
-    public Account(String id, String email, String validateKey, String period, String course) {
-        this.id = id;
+    public Account(String email, String validateKey, String period, String course) {
         this.email = email;
         this.validateKey = validateKey;
         this.period = period;
         this.course = course;
     }
+
+    public Account() {}
 
     public String getId() {
         return id;
