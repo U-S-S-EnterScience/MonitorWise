@@ -1,13 +1,11 @@
 package com.example.monitorwise.screen.user.register;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -25,17 +23,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class RegisterActivity extends BaseActivity implements RegisterContract.View {
 
-    private static final String TAG = "";
     private ActivityRegisterBinding mBinding;
     private ContentUserRegisterBinding mUserRegisterBinding;
     private com.example.monitorwise.databinding.ContentUserRegisterBinding mUserRegisterFieldsBinding;
     private FirebaseAuth mAuth;
-    private boolean validate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +47,6 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         mUserRegisterFieldsBinding = mBinding.includeContentUserRegister;
         mUserRegisterFieldsBinding.progressBar.setVisibility(View.INVISIBLE);
         mUserRegisterFieldsBinding.setListener(this);
-
     }
 
     @Override
@@ -86,7 +82,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                                     );
                                     finish();
                                 } else {
-                                    String error = task.getException().getMessage();
+                                    String error = Objects.requireNonNull(task.getException()).getMessage();
                                     Toast.makeText(
                                             RegisterActivity.this,
                                             "" + error,
@@ -116,9 +112,9 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
         mDatabase.child("validateKeys").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    if(postSnapshot.getValue(String.class).equals(getValidateKey())) {
+                    if(Objects.equals(postSnapshot.getValue(String.class), getValidateKey())) {
                         registerUser();
                         break;
                     } else {
@@ -138,7 +134,6 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                         Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     public String getCourse() {
@@ -146,21 +141,23 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         /*return mBinding.includeContentUserRegister != null ?
                 mBinding.includeContentUserRegister.edtCourse.getText().toString() : "";*/
     }
+
     public String getValidateKey() {
         return "MAT202102D";
         /*return mBinding.includeContentUserRegister != null ?
                 mBinding.includeContentUserRegister.edtValidateKey.getText().toString() : "";*/
-    }
-    @Override
-    public String getEmail() {
-        return mBinding.includeContentUserRegister != null ?
-                mBinding.includeContentUserRegister.edtLoginRegister.getText().toString() : "";
     }
 
     @Override
     public String getPeriod() {
         return "Noturno";
         //return null;
+    }
+
+    @Override
+    public String getEmail() {
+        return mBinding.includeContentUserRegister != null ?
+                mBinding.includeContentUserRegister.edtLoginRegister.getText().toString() : "";
     }
 
     @Override
@@ -174,6 +171,4 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         return mBinding.includeContentUserRegister != null ?
                 mBinding.includeContentUserRegister.edtPasswordConfirm.getText().toString() : "";
     }
-
-
 }
