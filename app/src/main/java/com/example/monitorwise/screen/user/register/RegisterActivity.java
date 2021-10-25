@@ -168,7 +168,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     @Override
     public String getPasswordAgain() {
-        return
+        return mBinding.includeContentUserRegister != null ?
                 mBinding.includeContentUserRegister.edtPasswordConfirm.getText().toString() : "";
     }
 }
