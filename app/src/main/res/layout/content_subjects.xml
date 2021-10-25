@@ -6,8 +6,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
         android:gravity="start"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/margin_micro">
 
         <TextView
             android:id="@+id/txt_subject_title"
@@ -22,8 +24,10 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/example"/>
-
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="@string/example" />
 
     </LinearLayout>
 </layout>
