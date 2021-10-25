@@ -24,17 +24,15 @@
 
             <include
                 android:id="@+id/include_content_discipline_name"
-                layout="@layout/content_discipline_name"/>
+                layout="@layout/content_discipline_name" />
 
             <include
                 android:id="@+id/include_content_presence_list"
                 layout="@layout/content_presence_item" />
 
             <include
-                android:id="@+id/include_content_subjects"
-                layout="@layout/content_subjects"/>
-
-
+                android:id="@+id/include_content_subject"
+                layout="@layout/content_subjects" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

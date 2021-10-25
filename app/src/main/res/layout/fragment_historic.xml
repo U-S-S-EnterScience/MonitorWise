@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="start"
+        android:orientation="vertical"
+        tools:context=".screen.historic.HistoricFragment">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_big_extra"
+            android:textStyle="bold"
+            tools:text="Mateus Rocha Pereira" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_micro_large"
+            android:gravity="start"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_micro_large"
+                android:text="@string/registration"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_default"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_micro"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_default"
+                tools:text="Análise e desenvolvimento de sistemas" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_micro_large"
+                android:text="@string/status"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_default"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_micro"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_default"
+                tools:text="Cursando 5º semestre" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/margin_super"
+            android:layout_marginTop="@dimen/margin_micro_large"
+            android:layout_marginBottom="@dimen/margin_large_extra"
+            android:background="@color/dark_gray" />
+
+        <include
+            android:id="@+id/include_content_select_month"
+            layout="@layout/content_select_month"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_micro_large" />
+
+        <include
+            android:id="@+id/content_month_selection"
+            layout="@layout/content_month_selection"/>
+
+        <include
+            android:id="@+id/include_select_discipline"
+            layout="@layout/content_select_discipline" />
+
+        <include
+            android:id="@+id/content_search_historic"
+            layout="@layout/content_search_historic"/>
+
+    </LinearLayout>
+</layout>

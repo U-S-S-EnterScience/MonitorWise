@@ -34,4 +34,9 @@
     <string name="add">Adicionar</string>
     <string name="subjects">Assunto(s): </string>
     <string name="example">Ex: Laço de repetição While</string>
+    <string name="registration">Matrícula: </string>
+    <string name="chose_month">Selecione o mês</string>
+    <string name="chose_discipline">Selecione a(s) disciplina(s)</string>
+    <string name="total_hours">Horas Totais: </string>
+    <string name="select_month">Selecione o(s) mês(es)</string>
 </resources>
