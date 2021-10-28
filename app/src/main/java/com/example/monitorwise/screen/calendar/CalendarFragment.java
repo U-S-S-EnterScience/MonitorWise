@@ -27,7 +27,6 @@ public class CalendarFragment extends BaseFragment implements CalendarContract {
     public static CalendarFragment newInstance() {
 
         CalendarFragment fragment = new CalendarFragment();
-
         return fragment;
     }
 
@@ -37,18 +36,17 @@ public class CalendarFragment extends BaseFragment implements CalendarContract {
                                           @Nullable ViewGroup container,
                                           @Nullable Bundle savedInstanceState) {
 
-        mBinding = FragmentCalendarBinding.inflate(inflater, container, false);
-        android.view.View root = mBinding.getRoot();
+        mBinding = (FragmentCalendarBinding) this.bindView(
+                inflater, R.layout.fragment_calendar, container,false);
 
         onInitView();
 
-        return root;
+        return mBinding.getRoot();
     }
 
     private void onInitView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBinding.getRoot().getContext(), LinearLayoutManager.VERTICAL, false);
     }
-
 
     @Override
     public void onDestroyView() {
