@@ -13,26 +13,40 @@ import android.view.ViewGroup;
 
 import com.example.monitorwise.R;
 import com.example.monitorwise.databinding.FragmentMonitorBinding;
+import com.example.monitorwise.ui.fragment.BaseFragment;
 
 
-public class MonitorFragment extends Fragment {
+public class MonitorFragment extends BaseFragment {
 
     private FragmentMonitorBinding mBinding;
 
+    public static MonitorFragment newInstance() {
+
+        MonitorFragment fragment = new MonitorFragment();
+        return fragment;
+    }
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
 
-        mBinding = FragmentMonitorBinding.inflate(inflater, container, false);
-        View root = mBinding.getRoot();
+        mBinding = (FragmentMonitorBinding) this.bindView(
+                inflater, R.layout.fragment_monitor, container, false);
 
         onInitView();
 
-        return root;
-
+        return mBinding.getRoot();
     }
 
     private void onInitView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBinding.getRoot().getContext(), LinearLayoutManager.VERTICAL, false);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mBinding = null;
     }
 }
