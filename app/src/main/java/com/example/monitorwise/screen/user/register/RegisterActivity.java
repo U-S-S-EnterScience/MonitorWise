@@ -1,7 +1,6 @@
 package com.example.monitorwise.screen.user.register;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
@@ -9,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.monitorwise.R;
@@ -25,17 +25,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class RegisterActivity extends BaseActivity implements RegisterContract.View {
 
-    private static final String TAG = "";
     private ActivityRegisterBinding mBinding;
     private ContentUserRegisterBinding mUserRegisterBinding;
     private com.example.monitorwise.databinding.ContentUserRegisterBinding mUserRegisterFieldsBinding;
     private FirebaseAuth mAuth;
-    private boolean validate = false;
+    private String turn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,24 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         mUserRegisterFieldsBinding = mBinding.includeContentUserRegister;
         mUserRegisterFieldsBinding.progressBar.setVisibility(View.INVISIBLE);
         mUserRegisterFieldsBinding.setListener(this);
+        mUserRegisterFieldsBinding.includeContentCourseTurn.setListener(this);
+
+
+    }
+
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+        turn = "";
+        switch(view.getId()) {
+            case R.id.radio_button_morning:
+                if (checked)
+                    turn = "Diurno";
+                    break;
+            case R.id.radio_button_night:
+                if (checked)
+                    turn = "Noturno";
+                    break;
+        }
 
     }
 
@@ -64,13 +82,10 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         Account account = new Account(
                 getEmail(),
                 getValidateKey(),
-                getPeriod(),
-                getCourse()
+                turn,
+                getCourse(),
+                getClassName()
         );
-
-        //Colocar o parâmetro disabled no botão para só liberar o click quando tdos os campos estiverem preenchidos
-        if(!TextUtils.isEmpty(getEmail()) || !TextUtils.isEmpty(getPassword()) || !TextUtils.isEmpty(getPasswordAgain())) {
-            if(getPassword().equals(getPasswordAgain())) {
                 mUserRegisterFieldsBinding.btnRegister.setVisibility(View.INVISIBLE);
                 mUserRegisterFieldsBinding.progressBar.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(getEmail(), getPassword())
@@ -80,13 +95,10 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                                 if(task.isSuccessful()) {
                                     account.setId(mAuth.getUid());
                                     account.save();
-                                    startActivity(new Intent(
-                                            RegisterActivity.this,
-                                            HomeActivity.class)
-                                    );
+                                    startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
                                     finish();
                                 } else {
-                                    String error = task.getException().getMessage();
+                                    String error = Objects.requireNonNull(task.getException()).getMessage();
                                     Toast.makeText(
                                             RegisterActivity.this,
                                             "" + error,
@@ -96,6 +108,37 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                                 mUserRegisterFieldsBinding.btnRegister.setVisibility(View.VISIBLE);
                             }
                         });
+
+    }
+
+    public void validateKeys() {
+        if(validateClick()) {
+            if(getPassword().equals(getPasswordAgain())) {
+                DatabaseReference mDatabase;
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                mDatabase.child("validateKeys").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                            if(Objects.equals(postSnapshot.getValue(String.class), getValidateKey())) {
+                                registerUser();
+                                return;
+                            }
+                        }
+                        Toast.makeText(
+                                RegisterActivity.this,
+                                "Chave de ativação informada não conforme, favor inserir uma chave valida.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        Toast.makeText(
+                                RegisterActivity.this,
+                                "" + error.toException(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
             } else {
                 Toast.makeText(
                         RegisterActivity.this,
@@ -110,57 +153,37 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         }
     }
 
-    public void validateKeys() {
-        DatabaseReference mDatabase;
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        mDatabase.child("validateKeys").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    if(postSnapshot.getValue(String.class).equals(getValidateKey())) {
-                        registerUser();
-                        break;
-                    } else {
-                        Toast.makeText(
-                                RegisterActivity.this,
-                                "Chave de ativação informada não conforme, favor inserir uma chave valida.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Toast.makeText(
-                        RegisterActivity.this,
-                        "" + error.toException(),
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-
+    public boolean validateClick() {
+        return !getCourse().equals("Escolha seu curso")
+                && !getClassName().equals("Disciplinas que deseja ministrar")
+                && !TextUtils.isEmpty(getEmail())
+                && !TextUtils.isEmpty(getPassword())
+                && !TextUtils.isEmpty(getPasswordAgain())
+                && !TextUtils.isEmpty(getValidateKey());
     }
 
+    @Override
     public String getCourse() {
-        return "Análise e Desenvolvimento de Sistemas";
-        /*return mBinding.includeContentUserRegister != null ?
-                mBinding.includeContentUserRegister.edtCourse.getText().toString() : "";*/
+        return mBinding.includeContentUserRegister != null ?
+                mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.getText().toString() : "";
     }
+
+    @Override
+    public String getClassName() {
+        return mBinding.includeContentUserRegister != null ?
+                mBinding.includeContentUserRegister.includeContentDisciplineChoose.textViewChooseCourse.getText().toString() : "";
+    }
+
+    @Override
     public String getValidateKey() {
-        return "MAT202102D";
-        /*return mBinding.includeContentUserRegister != null ?
-                mBinding.includeContentUserRegister.edtValidateKey.getText().toString() : "";*/
+        return mBinding.includeContentUserRegister != null ?
+                mBinding.includeContentUserRegister.edtActiveKeyRegister.getText().toString() : "";
     }
+
     @Override
     public String getEmail() {
         return mBinding.includeContentUserRegister != null ?
                 mBinding.includeContentUserRegister.edtLoginRegister.getText().toString() : "";
-    }
-
-    @Override
-    public String getPeriod() {
-        return "Noturno";
-        //return null;
     }
 
     @Override
@@ -174,6 +197,4 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         return mBinding.includeContentUserRegister != null ?
                 mBinding.includeContentUserRegister.edtPasswordConfirm.getText().toString() : "";
     }
-
-
 }

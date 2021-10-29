@@ -9,15 +9,18 @@ public class Account {
     private String validateKey;
     private String period;
     private String course;
+    private String className;
 
-    public Account(String email, String validateKey, String period, String course) {
+    public Account(String email, String validateKey, String period, String course, String className) {
         this.email = email;
         this.validateKey = validateKey;
         this.period = period;
         this.course = course;
+        this.className = className;
     }
 
-    public Account() {}
+    public Account() {
+    }
 
     public String getId() {
         return id;
@@ -35,12 +38,12 @@ public class Account {
         this.email = email;
     }
 
-    public String getActivateKey() {
+    public String getValidateKey() {
         return validateKey;
     }
 
-    public void setActivateKey(String activateKey) {
-        this.validateKey = activateKey;
+    public void setValidateKey(String validateKey) {
+        this.validateKey = validateKey;
     }
 
     public String getPeriod() {
@@ -57,6 +60,14 @@ public class Account {
 
     public void setCourse(String course) {
         this.course = course;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public void save() {
