@@ -56,14 +56,24 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/edt_password_register"
+            android:id="@+id/edt_active_key_register"
             style="@style/edit_text_login_fields"
             android:layout_marginTop="@dimen/margin_big"
+            android:hint="@string/key"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linear_layout" />
+
+        <EditText
+            android:id="@+id/edt_password_register"
+            style="@style/edit_text_login_fields"
+            android:layout_marginTop="16dp"
             android:hint="@string/password"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linear_layout" />
+            app:layout_constraintTop_toBottomOf="@+id/edt_active_key_register" />
 
         <EditText
             android:id="@+id/edt_password_confirm"
