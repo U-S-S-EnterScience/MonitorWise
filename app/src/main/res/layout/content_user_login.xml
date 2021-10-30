@@ -43,6 +43,7 @@
         <CheckBox
             android:id="@+id/check_box_show_password_login"
             style="@style/check_box_show_password"
+            android:onClick="onCheckboxClicked"
             app:layout_constraintStart_toStartOf="@id/edit_text_password"
             app:layout_constraintTop_toBottomOf="@+id/edit_text_password" />
 

@@ -7,8 +7,11 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.monitorwise.R;
@@ -60,6 +63,50 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         }
     }
 
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+
+        switch (view.getId()) {
+            case R.id.check_box_morning:
+                if (checked)
+                    setMorningTurn();
+                break;
+
+            case R.id.check_box_night:
+                if (checked)
+                    setNightTurn();
+                break;
+
+            case R.id.check_box_show_password_register:
+                if (checked)
+                    showPassword();
+                else
+                    hidePassword();
+        }
+    }
+
+    private void showPassword() {
+        mUserRegisterFieldsBinding.checkBoxShowPasswordRegister.setChecked(true);
+        mUserRegisterFieldsBinding.edtPasswordRegister.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        mUserRegisterFieldsBinding.edtPasswordConfirm.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+    }
+
+    private void hidePassword() {
+        mUserRegisterFieldsBinding.checkBoxShowPasswordRegister.setChecked(false);
+        mUserRegisterFieldsBinding.edtPasswordRegister.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        mUserRegisterFieldsBinding.edtPasswordConfirm.setTransformationMethod(PasswordTransformationMethod.getInstance());
+    }
+
+    private void setMorningTurn() {
+        mUserRegisterFieldsBinding.includeContentCourseTurn.checkBoxMorning.setChecked(true);
+        mUserRegisterFieldsBinding.includeContentCourseTurn.checkBoxNight.setChecked(false);
+    }
+
+    private void setNightTurn() {
+        mUserRegisterFieldsBinding.includeContentCourseTurn.checkBoxMorning.setChecked(false);
+        mUserRegisterFieldsBinding.includeContentCourseTurn.checkBoxNight.setChecked(true);
+    }
+
     public void registerUser() {
         Account account = new Account(
                 getEmail(),
@@ -69,15 +116,15 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         );
 
         //Colocar o parâmetro disabled no botão para só liberar o click quando tdos os campos estiverem preenchidos
-        if(!TextUtils.isEmpty(getEmail()) || !TextUtils.isEmpty(getPassword()) || !TextUtils.isEmpty(getPasswordAgain())) {
-            if(getPassword().equals(getPasswordAgain())) {
+        if (!TextUtils.isEmpty(getEmail()) || !TextUtils.isEmpty(getPassword()) || !TextUtils.isEmpty(getPasswordAgain())) {
+            if (getPassword().equals(getPasswordAgain())) {
                 mUserRegisterFieldsBinding.btnRegister.setVisibility(View.INVISIBLE);
                 mUserRegisterFieldsBinding.progressBar.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(getEmail(), getPassword())
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()) {
+                                if (task.isSuccessful()) {
                                     account.setId(mAuth.getUid());
                                     account.save();
                                     startActivity(new Intent(
@@ -117,8 +164,8 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         mDatabase.child("validateKeys").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    if(postSnapshot.getValue(String.class).equals(getValidateKey())) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    if (postSnapshot.getValue(String.class).equals(getValidateKey())) {
                         registerUser();
                         break;
                     } else {
@@ -146,11 +193,13 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         /*return mBinding.includeContentUserRegister != null ?
                 mBinding.includeContentUserRegister.edtCourse.getText().toString() : "";*/
     }
+
     public String getValidateKey() {
         return "MAT202102D";
         /*return mBinding.includeContentUserRegister != null ?
                 mBinding.includeContentUserRegister.edtValidateKey.getText().toString() : "";*/
     }
+
     @Override
     public String getEmail() {
         return mBinding.includeContentUserRegister != null ?

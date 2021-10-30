@@ -36,8 +36,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         onInitView();
     }
 
@@ -46,7 +44,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(currentUser != null) {
+        if (currentUser != null) {
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
             finish();
@@ -59,19 +57,41 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
 
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+
+        if (view.getId() == R.id.check_box_show_password_login) {
+            if (checked) {
+                showPassword();
+            } else {
+                hidePassword();
+            }
+        }
+    }
+
+    private void showPassword() {
+        mUserLoginFieldsBinding.checkBoxShowPasswordLogin.setChecked(true);
+        mUserLoginFieldsBinding.editTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+    }
+
+    private void hidePassword() {
+        mUserLoginFieldsBinding.checkBoxShowPasswordLogin.setChecked(false);
+        mUserLoginFieldsBinding.editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+    }
+
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-                if(!TextUtils.isEmpty(getEmail()) || !TextUtils.isEmpty(getPassword())) {
+                if (!TextUtils.isEmpty(getEmail()) || !TextUtils.isEmpty(getPassword())) {
                     mUserLoginFieldsBinding.btnLogin.setVisibility(View.INVISIBLE);
                     mUserLoginFieldsBinding.progressBar.setVisibility(View.VISIBLE);
                     mAuth.signInWithEmailAndPassword(getEmail(), getPassword())
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if(task.isSuccessful()) {
+                                    if (task.isSuccessful()) {
                                         startActivity(new Intent(
                                                 LoginActivity.this,
                                                 HomeActivity.class)

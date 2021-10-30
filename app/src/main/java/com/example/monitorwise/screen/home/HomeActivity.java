@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.monitorwise.R;
@@ -15,6 +17,7 @@ import com.example.monitorwise.databinding.ActivityHomeBinding;
 import com.example.monitorwise.screen.calendar.CalendarFragment;
 import com.example.monitorwise.screen.historic.HistoricFragment;
 import com.example.monitorwise.screen.monitor.fragment.MonitorFragment;
+import com.example.monitorwise.screen.user.login.LoginActivity;
 import com.example.monitorwise.util.Constants;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -60,6 +63,20 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         initNavigationBottom();
     }
 
+
+    @Override
+    public void onClick(View view) {
+        super.onClick(view);
+
+        if (view.getId() == R.id.btn_logout) {
+            mAuth.signOut();
+            startActivity(new Intent(
+                    HomeActivity.this,
+                    LoginActivity.class)
+            );
+
+        }
+    }
 
     private void initNavigationBottom() {
         mBinding.navigationBottom.setOnItemSelectedListener(item -> {
