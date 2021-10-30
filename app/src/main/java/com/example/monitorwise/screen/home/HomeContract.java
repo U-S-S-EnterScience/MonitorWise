@@ -14,4 +14,8 @@ public interface HomeContract {
 
         void displayLocationSettingsRequest();
     }
+
+    interface Repository {
+
+    }
 }

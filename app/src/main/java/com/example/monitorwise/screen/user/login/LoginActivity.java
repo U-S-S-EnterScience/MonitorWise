@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     private ActivityLoginBinding mBinding;
+    private LoginContract.ViewModel viewModel;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private com.example.monitorwise.databinding.ContentUserLoginBinding mUserLoginFieldsBinding;

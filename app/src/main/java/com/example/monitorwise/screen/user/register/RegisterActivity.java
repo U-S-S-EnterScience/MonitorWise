@@ -35,6 +35,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     private ActivityRegisterBinding mBinding;
     private ContentUserRegisterBinding mUserRegisterBinding;
+    private RegisterContract.ViewModel viewModel;
     private com.example.monitorwise.databinding.ContentUserRegisterBinding mUserRegisterFieldsBinding;
     private FirebaseAuth mAuth;
     private String turn;
