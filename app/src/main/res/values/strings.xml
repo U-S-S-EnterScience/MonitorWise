@@ -8,6 +8,7 @@
     <string name="login">Entrar</string>
     <string name="email">E-mail</string>
     <string name="password">Senha</string>
+    <string name="key">Chave de Ativação</string>
     <string name="showPassword">Mostrar Senha</string>
     <string name="changePassword">Esqueceu a Senha?</string>
     <string name="signUp">Cadastre-se</string>

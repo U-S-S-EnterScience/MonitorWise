@@ -1,35 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="listener"
+            type="com.example.monitorwise.screen.user.register.RegisterActivity" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_default">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <TextView
+        android:id="@+id/text_view_period"
+        style="@style/text_view_subtitle"
+        android:text="@string/period"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radio_group_period"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_default">
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="54dp"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/text_view_period"
-            style="@style/text_view_subtitle"
-            android:text="@string/period"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <CheckBox
-            android:id="@+id/check_box_morning"
+        <RadioButton
+            android:id="@+id/radio_button_morning"
             style="@style/check_box_turns"
-            android:onClick="onCheckboxClicked"
             android:text="@string/morning"
             app:layout_constraintStart_toStartOf="@id/text_view_period"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_period" />
+            app:layout_constraintTop_toBottomOf="@+id/text_view_period"
+            android:onClick="@{listener::onRadioButtonClicked}"/>
 
-        <CheckBox
-            android:id="@+id/check_box_night"
+        <RadioButton
+            android:id="@+id/radio_button_night"
             style="@style/check_box_turns"
-            android:layout_marginStart="@dimen/margin_default"
-            android:onClick="onCheckboxClicked"
+            android:layout_marginStart="28dp"
             android:text="@string/night"
             app:layout_constraintStart_toEndOf="@+id/check_box_morning"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_period" />
+            android:onClick="@{listener::onRadioButtonClicked}" />
+    </RadioGroup>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
