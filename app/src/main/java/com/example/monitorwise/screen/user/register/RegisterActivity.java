@@ -6,8 +6,11 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -58,18 +61,42 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
         turn = "";
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.radio_button_morning:
                 if (checked)
                     turn = "Diurno";
-                    break;
+                break;
             case R.id.radio_button_night:
                 if (checked)
                     turn = "Noturno";
-                    break;
+                break;
         }
 
     }
+
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+
+        if (view.getId() == R.id.check_box_show_password_register)
+            if (checked)
+                showPassword();
+            else
+                hidePassword();
+    }
+
+
+    private void showPassword() {
+        mUserRegisterFieldsBinding.checkBoxShowPasswordRegister.setChecked(true);
+        mUserRegisterFieldsBinding.edtPasswordRegister.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        mUserRegisterFieldsBinding.edtPasswordConfirm.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+    }
+
+    private void hidePassword() {
+        mUserRegisterFieldsBinding.checkBoxShowPasswordRegister.setChecked(false);
+        mUserRegisterFieldsBinding.edtPasswordRegister.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        mUserRegisterFieldsBinding.edtPasswordConfirm.setTransformationMethod(PasswordTransformationMethod.getInstance());
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -86,41 +113,41 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 getCourse(),
                 getClassName()
         );
-                mUserRegisterFieldsBinding.btnRegister.setVisibility(View.INVISIBLE);
-                mUserRegisterFieldsBinding.progressBar.setVisibility(View.VISIBLE);
-                mAuth.createUserWithEmailAndPassword(getEmail(), getPassword())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()) {
-                                    account.setId(mAuth.getUid());
-                                    account.save();
-                                    startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
-                                    finish();
-                                } else {
-                                    String error = Objects.requireNonNull(task.getException()).getMessage();
-                                    Toast.makeText(
-                                            RegisterActivity.this,
-                                            "" + error,
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                                mUserRegisterFieldsBinding.progressBar.setVisibility(View.INVISIBLE);
-                                mUserRegisterFieldsBinding.btnRegister.setVisibility(View.VISIBLE);
-                            }
-                        });
+        mUserRegisterFieldsBinding.btnRegister.setVisibility(View.INVISIBLE);
+        mUserRegisterFieldsBinding.progressBar.setVisibility(View.VISIBLE);
+        mAuth.createUserWithEmailAndPassword(getEmail(), getPassword())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            account.setId(mAuth.getUid());
+                            account.save();
+                            startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+                            finish();
+                        } else {
+                            String error = Objects.requireNonNull(task.getException()).getMessage();
+                            Toast.makeText(
+                                    RegisterActivity.this,
+                                    "" + error,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        mUserRegisterFieldsBinding.progressBar.setVisibility(View.INVISIBLE);
+                        mUserRegisterFieldsBinding.btnRegister.setVisibility(View.VISIBLE);
+                    }
+                });
 
     }
 
     public void validateKeys() {
-        if(validateClick()) {
-            if(getPassword().equals(getPasswordAgain())) {
+        if (validateClick()) {
+            if (getPassword().equals(getPasswordAgain())) {
                 DatabaseReference mDatabase;
                 mDatabase = FirebaseDatabase.getInstance().getReference();
                 mDatabase.child("validateKeys").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                            if(Objects.equals(postSnapshot.getValue(String.class), getValidateKey())) {
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            if (Objects.equals(postSnapshot.getValue(String.class), getValidateKey())) {
                                 registerUser();
                                 return;
                             }
