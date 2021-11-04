@@ -22,6 +22,8 @@ import java.util.Calendar;
 
 public class CalendarFragment extends BaseFragment implements CalendarContract {
 
+    public CalendarContract.ViewModel viewModel;
+
     private FragmentCalendarBinding mBinding;
 
     public static CalendarFragment newInstance() {

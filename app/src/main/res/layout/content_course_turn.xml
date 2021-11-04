@@ -2,50 +2,57 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="listener"
             type="com.example.monitorwise.screen.user.register.RegisterActivity" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/margin_default">
 
-
-    <TextView
-        android:id="@+id/text_view_period"
-        style="@style/text_view_subtitle"
-        android:text="@string/period"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RadioGroup
-        android:id="@+id/radio_group_period"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="54dp"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints">
+        android:layout_marginTop="@dimen/margin_default">
 
-        <RadioButton
-            android:id="@+id/radio_button_morning"
-            style="@style/check_box_turns"
-            android:text="@string/morning"
-            app:layout_constraintStart_toStartOf="@id/text_view_period"
+        <TextView
+            android:id="@+id/text_view_period"
+            style="@style/text_view_subtitle"
+            android:layout_marginStart="@dimen/margin_default"
+            android:text="@string/period"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radio_group_period"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_default"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_period"
-            android:onClick="@{listener::onRadioButtonClicked}"/>
+            tools:ignore="MissingConstraints">
 
-        <RadioButton
-            android:id="@+id/radio_button_night"
-            style="@style/check_box_turns"
-            android:layout_marginStart="28dp"
-            android:text="@string/night"
-            app:layout_constraintStart_toEndOf="@+id/check_box_morning"
-            android:onClick="@{listener::onRadioButtonClicked}" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/radio_button_morning"
+                style="@style/check_box_turns"
+                android:onClick="@{listener::onRadioButtonClicked}"
+                android:text="@string/morning"
+                app:layout_constraintStart_toStartOf="@id/text_view_period"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_period" />
+
+            <RadioButton
+                android:id="@+id/radio_button_night"
+                style="@style/check_box_turns"
+                android:layout_marginStart="28dp"
+                android:onClick="@{listener::onRadioButtonClicked}"
+                android:text="@string/night"
+                app:layout_constraintStart_toEndOf="@+id/check_box_morning" />
+        </RadioGroup>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

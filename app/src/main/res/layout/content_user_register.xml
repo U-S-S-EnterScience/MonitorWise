@@ -90,6 +90,7 @@
             android:id="@+id/check_box_show_password_register"
             style="@style/check_box_show_password"
             android:layout_marginTop="@dimen/margin_default_minimum"
+            android:onClick="onCheckboxClicked"
             app:layout_constraintStart_toStartOf="@+id/edt_password_confirm"
             app:layout_constraintTop_toBottomOf="@+id/edt_password_confirm" />
 

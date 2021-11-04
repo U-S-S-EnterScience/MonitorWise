@@ -16,9 +16,10 @@ import com.example.monitorwise.databinding.FragmentMonitorBinding;
 import com.example.monitorwise.ui.fragment.BaseFragment;
 
 
-public class MonitorFragment extends BaseFragment {
+public class MonitorFragment extends BaseFragment implements MonitorContract.View {
 
     private FragmentMonitorBinding mBinding;
+    private MonitorContract.ViewModel viewModel;
 
     public static MonitorFragment newInstance() {
 
