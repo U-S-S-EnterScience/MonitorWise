@@ -1,13 +1,12 @@
-package com.example.monitorwise.screen.calendar;
+package com.example.monitorwise.screen.monitor.fragment;
 
 import com.example.monitorwise.base.BaseContract;
 import com.example.monitorwise.base.BaseView;
-import com.example.monitorwise.base.BaseViewModel;
 
-public interface CalendarContract {
+public interface MonitorContract {
 
     interface View extends BaseView {
-        int getSize();
+
     }
 
     interface ViewModel extends BaseContract.ViewModel {

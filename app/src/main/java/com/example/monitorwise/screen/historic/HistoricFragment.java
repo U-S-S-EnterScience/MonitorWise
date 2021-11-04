@@ -3,33 +3,27 @@ package com.example.monitorwise.screen.historic;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.monitorwise.R;
+import com.example.monitorwise.databinding.FragmentHistoricBinding;
+import com.example.monitorwise.ui.fragment.BaseFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HistoricFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class HistoricFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class HistoricFragment extends BaseFragment implements HistoricContract {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private HistoricContract.ViewModel viewModel;
+
+    private FragmentHistoricBinding mBinding;
+
 
     public HistoricFragment() {
         // Required empty public constructor
     }
-
 
 
     public static HistoricFragment newInstance() {
@@ -38,19 +32,26 @@ public class HistoricFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public android.view.View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                          Bundle savedInstanceState) {
+
+        mBinding = (FragmentHistoricBinding) this.bindView(
+                inflater, R.layout.fragment_historic, container, false);
+
+        onInitView();
+
+        return mBinding.getRoot();
+    }
+
+    private void onInitView() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBinding.getRoot().getContext(), LinearLayoutManager.VERTICAL, false);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_historic, container, false);
+    public void onDestroyView() {
+        super.onDestroyView();
+        mBinding = null;
     }
 }
