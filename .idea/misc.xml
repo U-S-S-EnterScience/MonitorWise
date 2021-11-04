@@ -5,9 +5,20 @@
       <map>
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MonitorWise/app/src/main/res/layout/activity_home.xml" value="0.225" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MonitorWise/app/src/main/res/layout/activity_login.xml" value="0.225" />
+<<<<<<< HEAD
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MonitorWise/app/src/main/res/layout/activity_register.xml" value="0.33" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MonitorWise/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MonitorWise/app/src/main/res/layout/content_course_choose.xml" value="0.225" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MonitorWise/app/src/main/res/layout/content_course_turn.xml" value="0.33" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MonitorWise/app/src/main/res/layout/content_discipline_chose.xml" value="0.225" />
+=======
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MonitorWise/app/src/main/res/layout/activity_register.xml" value="0.225" />
+>>>>>>> origin
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MonitorWise/app/src/main/res/layout/content_user_login.xml" value="0.225" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MonitorWise/app/src/main/res/layout/content_user_register.xml" value="0.225" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MonitorWise/app/src/main/res/layout/fragment_calendar.xml" value="0.22" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MonitorWise/app/src/main/res/layout/fragment_historic.xml" value="0.25" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MonitorWise/app/src/main/res/layout/fragment_monitor.xml" value="0.33" />
         <entry key="..\:/lucas/desktop/Fatec/PI/app/MonitorWise/app/src/main/res/drawable/border_white.xml" value="0.2755208333333333" />
         <entry key="..\:/lucas/desktop/Fatec/PI/app/MonitorWise/app/src/main/res/drawable/btn_background.xml" value="0.2755208333333333" />
         <entry key="..\:/lucas/desktop/Fatec/PI/app/MonitorWise/app/src/main/res/drawable/btn_item_background.xml" value="0.381025641025641" />
