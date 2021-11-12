@@ -10,6 +10,9 @@ public class Course {
     private String turn;
     private List<Discipline> disciplines;
 
+    public Course(String name) {
+        this.name = name;
+    }
 
     public Course(String name, String turn, List<Discipline> disciplines) {
         this.name = name;

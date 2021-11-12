@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MonitorWise">
         <activity
+            android:name=".screen.disciplines.DisciplinesActivity"
+            android:exported="true" />
+        <activity
+            android:name=".screen.courses.CoursesActivity"
+            android:exported="true" />
+        <activity
             android:name=".screen.monitor.activity.MonitorActivity"
             android:exported="true" />
         <activity

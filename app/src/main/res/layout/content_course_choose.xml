@@ -1,39 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/text_view_choose_course"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_default_minimum"
-        android:text="@string/choseCourse"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <View
-        android:id="@+id/view_pin"
+        <import type="android.view.View" />
+
+        <variable
+            name="listener"
+            type="com.example.monitorwise.screen.user.register.RegisterActivity" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="@dimen/margin_big"
-        android:layout_marginTop="@dimen/margin_micro"
-        android:layout_marginEnd="@dimen/margin_big"
-        android:background="@color/light_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_choose_course" />
+        android:layout_height="wrap_content"
+        android:onClick="@{listener::onClick}">
 
-    <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-        app:layout_constraintBottom_toTopOf="@+id/view_pin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text_view_choose_course"
-        app:layout_constraintTop_toTopOf="@+id/text_view_choose_course" />
+        <TextView
+            android:id="@+id/text_view_choose_course"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_default_minimum"
+            android:text="@string/choseCourse"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/view_pin"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margin_micro"
+            android:layout_marginEnd="@dimen/margin_micro_large"
+            android:background="@color/light_gray"
+            app:layout_constraintEnd_toEndOf="@id/img_arrow"
+            app:layout_constraintStart_toStartOf="@id/text_view_choose_course"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_choose_course" />
+
+        <ImageView
+            android:id="@+id/img_arrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            app:layout_constraintBottom_toTopOf="@+id/view_pin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_view_choose_course"
+            app:layout_constraintTop_toTopOf="@+id/text_view_choose_course" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
