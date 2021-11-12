@@ -2,6 +2,8 @@ package com.example.monitorwise.screen.user.register;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,16 +20,17 @@ import com.example.monitorwise.base.BaseActivity;
 import com.example.monitorwise.databinding.ActivityRegisterBinding;
 import com.example.monitorwise.databinding.ContentUserRegisterBinding;
 import com.example.monitorwise.model.domain.account.Account;
+import com.example.monitorwise.screen.courses.CoursesActivity;
+import com.example.monitorwise.screen.disciplines.DisciplinesActivity;
 import com.example.monitorwise.screen.home.HomeActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.example.monitorwise.util.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 
 import java.util.Objects;
 
@@ -36,7 +39,8 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     private ActivityRegisterBinding mBinding;
     private ContentUserRegisterBinding mUserRegisterBinding;
     private RegisterContract.ViewModel viewModel;
-    private com.example.monitorwise.databinding.ContentUserRegisterBinding mUserRegisterFieldsBinding;
+    private RegisterContract.Repository repository;
+
     private FirebaseAuth mAuth;
     private String turn;
 
@@ -47,15 +51,27 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         onInitView();
     }
 
+
     private void onInitView() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_register);
+        mUserRegisterBinding = mBinding.includeContentUserRegister;
         mAuth = FirebaseAuth.getInstance();
-        mUserRegisterFieldsBinding = mBinding.includeContentUserRegister;
-        mUserRegisterFieldsBinding.progressBar.setVisibility(View.INVISIBLE);
-        mUserRegisterFieldsBinding.setListener(this);
-        mUserRegisterFieldsBinding.includeContentCourseTurn.setListener(this);
+        mUserRegisterBinding.progressBar.setVisibility(View.INVISIBLE);
+        mUserRegisterBinding.setListener(this);
+        mUserRegisterBinding.includeContentCourseChoose.setListener(this);
+        mUserRegisterBinding.includeContentCourseTurn.setListener(this);
+        mUserRegisterBinding.includeContentDisciplineChoose.setListener(this);
 
+    }
 
+    private void updateDisciplinesData() {
+        mBinding.includeContentUserRegister.includeContentDisciplineChoose.textViewChooseCourse.setText(getIntent().getSerializableExtra(Constants.DISCIPLINE_KEY).toString());
+    }
+
+    private void updateCourseData() {
+        mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.setText(getIntent().getSerializableExtra(Constants.COURSE_KEY).toString());
+        mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.setTextColor(getResources().getColor(R.color.black));
+        mBinding.includeContentUserRegister.includeContentCourseChoose.viewPin.setBackgroundColor(getResources().getColor(R.color.black));
     }
 
     public void onRadioButtonClicked(View view) {
@@ -85,25 +101,65 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     }
 
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void initializeComponents(){
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        if (intent.hasExtra(Constants.COURSE_KEY))
+            updateCourseData();
+        if (intent.hasExtra(Constants.DISCIPLINE_KEY))
+            updateDisciplinesData();
+        return;
+    }
+
     private void showPassword() {
-        mUserRegisterFieldsBinding.checkBoxShowPasswordRegister.setChecked(true);
-        mUserRegisterFieldsBinding.edtPasswordRegister.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-        mUserRegisterFieldsBinding.edtPasswordConfirm.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        mUserRegisterBinding.checkBoxShowPasswordRegister.setChecked(true);
+        mUserRegisterBinding.edtPasswordRegister.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        mUserRegisterBinding.edtPasswordConfirm.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
     }
 
     private void hidePassword() {
-        mUserRegisterFieldsBinding.checkBoxShowPasswordRegister.setChecked(false);
-        mUserRegisterFieldsBinding.edtPasswordRegister.setTransformationMethod(PasswordTransformationMethod.getInstance());
-        mUserRegisterFieldsBinding.edtPasswordConfirm.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        mUserRegisterBinding.checkBoxShowPasswordRegister.setChecked(false);
+        mUserRegisterBinding.edtPasswordRegister.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        mUserRegisterBinding.edtPasswordConfirm.setTransformationMethod(PasswordTransformationMethod.getInstance());
     }
 
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btn_register) {
-            validateKeys();
+
+        switch (view.getId()) {
+            case R.id.btn_register:
+                validateKeys();
+                break;
+
+            case R.id.include_content_course_choose:
+                goToCoursesActivity();
+                break;
+
+            case R.id.include_content_discipline_choose:
+                goToDisciplinesActivity();
+                break;
         }
     }
+
+
+    private void goToCoursesActivity() {
+        startActivity(new Intent(this, CoursesActivity.class));
+        onStop();
+    }
+
+
+    private void goToDisciplinesActivity() {
+        startActivity(new Intent(this, DisciplinesActivity.class));
+        onStop();
+    }
+
 
     public void registerUser() {
         Account account = new Account(
@@ -113,27 +169,24 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 getCourse(),
                 getClassName()
         );
-        mUserRegisterFieldsBinding.btnRegister.setVisibility(View.INVISIBLE);
-        mUserRegisterFieldsBinding.progressBar.setVisibility(View.VISIBLE);
+        mUserRegisterBinding.btnRegister.setVisibility(View.INVISIBLE);
+        mUserRegisterBinding.progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(getEmail(), getPassword())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            account.setId(mAuth.getUid());
-                            account.save();
-                            startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
-                            finish();
-                        } else {
-                            String error = Objects.requireNonNull(task.getException()).getMessage();
-                            Toast.makeText(
-                                    RegisterActivity.this,
-                                    "" + error,
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        mUserRegisterFieldsBinding.progressBar.setVisibility(View.INVISIBLE);
-                        mUserRegisterFieldsBinding.btnRegister.setVisibility(View.VISIBLE);
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        account.setId(mAuth.getUid());
+                        account.save();
+                        startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+                        finish();
+                    } else {
+                        String error = Objects.requireNonNull(task.getException()).getMessage();
+                        Toast.makeText(
+                                RegisterActivity.this,
+                                "" + error,
+                                Toast.LENGTH_SHORT).show();
                     }
+                    mUserRegisterBinding.progressBar.setVisibility(View.INVISIBLE);
+                    mUserRegisterBinding.btnRegister.setVisibility(View.VISIBLE);
                 });
 
     }

@@ -40,4 +40,5 @@
     <string name="chose_discipline">Selecione a(s) disciplina(s)</string>
     <string name="total_hours">Horas Totais: </string>
     <string name="select_month">Selecione o(s) mês(es)</string>
+    <string name="confirm">Confirmar</string>
 </resources>

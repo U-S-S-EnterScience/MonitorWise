@@ -16,4 +16,6 @@
     <color name="light_gray">#F6F5F5</color>
     <color name="accent">#00B9F6</color>
     <color name="dark_gray">#656565</color>
+    <color name="dark_white">#ECE9E9</color>
+    <color name="black_foreground">#50000000</color>
 </resources>
