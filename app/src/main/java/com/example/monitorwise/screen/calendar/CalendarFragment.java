@@ -39,7 +39,7 @@ public class CalendarFragment extends BaseFragment implements CalendarContract {
                                           @Nullable Bundle savedInstanceState) {
 
         mBinding = (FragmentCalendarBinding) this.bindView(
-                inflater, R.layout.fragment_calendar, container,false);
+                inflater, R.layout.fragment_calendar, container, false);
 
         onInitView();
 

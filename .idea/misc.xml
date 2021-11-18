@@ -36,6 +36,8 @@
         <entry key="..\:/pi/MonitorWise/app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.38333333333333336" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/drawable/ic_baseline_assignment_24.xml" value="0.38333333333333336" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.38333333333333336" />
+        <entry key="..\:/pi/MonitorWise/app/src/main/res/drawable/selected_item.xml" value="0.3880208333333333" />
+        <entry key="..\:/pi/MonitorWise/app/src/main/res/drawable/tab_selector.xml" value="0.3880208333333333" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout-v23/app_image_fade.xml" value="0.371875" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/activity_courses.xml" value="0.371875" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/activity_disciplines.xml" value="0.371875" />
@@ -49,7 +51,7 @@
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/content_course_choose.xml" value="0.371875" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/content_course_list.xml" value="0.371875" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/content_course_turn.xml" value="0.371875" />
-        <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/content_discipline_chose.xml" value="0.259375" />
+        <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/content_discipline_chose.xml" value="0.25" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/content_discipline_name.xml" value="0.3671875" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/content_month_selection.xml" value="0.37083333333333335" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/content_presence_item.xml" value="0.3671875" />
@@ -59,7 +61,7 @@
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/content_select_month.xml" value="0.259375" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/content_subjects.xml" value="0.33" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/content_user_login.xml" value="0.3671875" />
-        <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/content_user_register.xml" value="0.371875" />
+        <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/content_user_register.xml" value="0.35467565290648695" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/course_item.xml" value="0.3656998738965952" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/discipline_choose_item.xml" value="0.75" />
         <entry key="..\:/pi/MonitorWise/app/src/main/res/layout/discipline_item.xml" value="0.371875" />

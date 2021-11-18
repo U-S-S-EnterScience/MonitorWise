@@ -58,12 +58,7 @@ public class DisciplinesAdapter extends RecyclerView.Adapter<DisciplinesAdapter.
 
             mBinding = DataBindingUtil.bind(itemView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    clickListener.onItemClick(discipline);
-                }
-            });
+            itemView.setOnClickListener(view -> clickListener.onItemClick(discipline));
         }
 
         void bind(String discipline) {

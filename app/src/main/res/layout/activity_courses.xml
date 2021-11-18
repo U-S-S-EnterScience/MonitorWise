@@ -43,26 +43,30 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_big_extra" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="380dp">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_list_course"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/margin_micro"
-                        android:layout_marginTop="@dimen/margin_default"
-                        android:layout_marginBottom="@dimen/margin_micro_large"
-                        android:background="@color/white"
-                        android:padding="@dimen/margin_micro_large"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:listitem="@layout/course_item" />
+                        android:layout_height="wrap_content">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_list_course"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/margin_micro"
+                            android:layout_marginTop="@dimen/margin_default"
+                            android:layout_marginBottom="@dimen/margin_micro_large"
+                            android:background="@color/white"
+                            android:padding="@dimen/margin_micro_large"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:listitem="@layout/course_item" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.core.widget.NestedScrollView>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

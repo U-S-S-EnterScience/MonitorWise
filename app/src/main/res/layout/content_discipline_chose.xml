@@ -19,7 +19,7 @@
         android:onClick="@{listener::onClick}">
 
         <TextView
-            android:id="@+id/text_view_choose_course"
+            android:id="@+id/text_view_choose_discipline"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_default_minimum"
@@ -31,24 +31,23 @@
 
         <View
             android:id="@+id/view_pin"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginStart="@dimen/margin_big"
             android:layout_marginTop="@dimen/margin_micro"
-            android:layout_marginEnd="@dimen/margin_big"
             android:background="@color/light_gray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_choose_course" />
+            app:layout_constraintEnd_toEndOf="@id/img_arrow"
+            app:layout_constraintStart_toStartOf="@id/text_view_choose_discipline"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_choose_discipline" />
 
         <ImageView
+            android:id="@+id/img_arrow"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
             app:layout_constraintBottom_toTopOf="@+id/view_pin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/text_view_choose_course"
-            app:layout_constraintTop_toTopOf="@+id/text_view_choose_course" />
+            app:layout_constraintStart_toEndOf="@+id/text_view_choose_discipline"
+            app:layout_constraintTop_toTopOf="@+id/text_view_choose_discipline" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

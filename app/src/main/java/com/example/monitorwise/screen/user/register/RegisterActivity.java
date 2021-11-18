@@ -5,11 +5,17 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
@@ -38,8 +44,8 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     private ActivityRegisterBinding mBinding;
     private ContentUserRegisterBinding mUserRegisterBinding;
-    private RegisterContract.ViewModel viewModel;
-    private RegisterContract.Repository repository;
+    //private RegisterContract.ViewModel viewModel;
+    //private RegisterContract.Repository repository;
 
     private FirebaseAuth mAuth;
     private String turn;
@@ -51,10 +57,10 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         onInitView();
     }
 
-
     private void onInitView() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_register);
         mUserRegisterBinding = mBinding.includeContentUserRegister;
+        loadData();
         mAuth = FirebaseAuth.getInstance();
         mUserRegisterBinding.progressBar.setVisibility(View.INVISIBLE);
         mUserRegisterBinding.setListener(this);
@@ -64,14 +70,28 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     }
 
+
+    private void updateFields() {
+        updateDisciplinesData();
+        updateCourseData();
+    }
+
     private void updateDisciplinesData() {
-        mBinding.includeContentUserRegister.includeContentDisciplineChoose.textViewChooseCourse.setText(getIntent().getSerializableExtra(Constants.DISCIPLINE_KEY).toString());
+        String sValue = mBinding.includeContentUserRegister.includeContentDisciplineChoose.textViewChooseDiscipline.getText().toString();
+        String sSharedValue = "Disciplinas que deseja ministrar";
+        if (!sValue.equals(sSharedValue)) {
+            mBinding.includeContentUserRegister.includeContentDisciplineChoose.textViewChooseDiscipline.setTextColor(getResources().getColor(R.color.black));
+            mBinding.includeContentUserRegister.includeContentDisciplineChoose.viewPin.setBackgroundColor(getResources().getColor(R.color.black));
+        }
     }
 
     private void updateCourseData() {
-        mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.setText(getIntent().getSerializableExtra(Constants.COURSE_KEY).toString());
-        mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.setTextColor(getResources().getColor(R.color.black));
-        mBinding.includeContentUserRegister.includeContentCourseChoose.viewPin.setBackgroundColor(getResources().getColor(R.color.black));
+        String sValue = mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.getText().toString();
+        String sSharedValue = "Escolha seu curso";
+        if (!sValue.equals(sSharedValue)) {
+            mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.setTextColor(getResources().getColor(R.color.black));
+            mBinding.includeContentUserRegister.includeContentCourseChoose.viewPin.setBackgroundColor(getResources().getColor(R.color.black));
+        }
     }
 
     public void onRadioButtonClicked(View view) {
@@ -90,6 +110,13 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     }
 
+    private void loadData() {
+        SharedPreferences sharedPreferences = RegisterActivity.this.getSharedPreferences(Constants.REGISTER_SHARED_NAME, Context.MODE_PRIVATE);
+        mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.setText(sharedPreferences.getString(Constants.REGISTER_COURSE_KEY, ""));
+        mBinding.includeContentUserRegister.includeContentDisciplineChoose.textViewChooseDiscipline.setText(sharedPreferences.getString(Constants.REGISTER_DISCIPLINE_KEY, ""));
+        updateFields();
+    }
+
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
 
@@ -102,19 +129,8 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    public void initializeComponents(){
+    public void initializeComponents() {
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Intent intent = getIntent();
-        if (intent.hasExtra(Constants.COURSE_KEY))
-            updateCourseData();
-        if (intent.hasExtra(Constants.DISCIPLINE_KEY))
-            updateDisciplinesData();
-        return;
     }
 
     private void showPassword() {
@@ -132,7 +148,6 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     @Override
     public void onClick(View view) {
-
         switch (view.getId()) {
             case R.id.btn_register:
                 validateKeys();
@@ -143,21 +158,20 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 break;
 
             case R.id.include_content_discipline_choose:
-                goToDisciplinesActivity();
+                goToDisciplineActivity();
                 break;
         }
+    }
+
+    private void goToDisciplineActivity() {
+        startActivity(new Intent(this, DisciplinesActivity.class));
+        finish();
     }
 
 
     private void goToCoursesActivity() {
         startActivity(new Intent(this, CoursesActivity.class));
-        onStop();
-    }
-
-
-    private void goToDisciplinesActivity() {
-        startActivity(new Intent(this, DisciplinesActivity.class));
-        onStop();
+        finish();
     }
 
 
@@ -244,37 +258,36 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     @Override
     public String getCourse() {
-        return mBinding.includeContentUserRegister != null ?
-                mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.getText().toString() : "";
+        return mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.getText().toString();
+    }
+
+    @Override
+    public String getFullName() {
+        return mBinding.includeContentUserRegister.edtFullName.getText().toString();
     }
 
     @Override
     public String getClassName() {
-        return mBinding.includeContentUserRegister != null ?
-                mBinding.includeContentUserRegister.includeContentDisciplineChoose.textViewChooseCourse.getText().toString() : "";
+        return mBinding.includeContentUserRegister.includeContentDisciplineChoose.textViewChooseDiscipline.getText().toString();
     }
 
     @Override
     public String getValidateKey() {
-        return mBinding.includeContentUserRegister != null ?
-                mBinding.includeContentUserRegister.edtActiveKeyRegister.getText().toString() : "";
+        return mBinding.includeContentUserRegister.edtActiveKeyRegister.getText().toString();
     }
 
     @Override
     public String getEmail() {
-        return mBinding.includeContentUserRegister != null ?
-                mBinding.includeContentUserRegister.edtLoginRegister.getText().toString() : "";
+        return mBinding.includeContentUserRegister.edtLoginRegister.getText().toString();
     }
 
     @Override
     public String getPassword() {
-        return mBinding.includeContentUserRegister != null ?
-                mBinding.includeContentUserRegister.edtPasswordRegister.getText().toString() : "";
+        return mBinding.includeContentUserRegister.edtPasswordRegister.getText().toString();
     }
 
     @Override
     public String getPasswordAgain() {
-        return mBinding.includeContentUserRegister != null ?
-                mBinding.includeContentUserRegister.edtPasswordConfirm.getText().toString() : "";
+        return mBinding.includeContentUserRegister.edtPasswordConfirm.getText().toString();
     }
 }
