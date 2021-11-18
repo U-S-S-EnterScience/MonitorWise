@@ -1,7 +1,11 @@
 package com.example.monitorwise.screen.courses;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
@@ -11,6 +15,7 @@ import com.example.monitorwise.R;
 import com.example.monitorwise.base.BaseActivity;
 import com.example.monitorwise.databinding.ActivityCoursesBinding;
 import com.example.monitorwise.model.domain.course.Course;
+import com.example.monitorwise.screen.disciplines.DisciplinesActivity;
 import com.example.monitorwise.screen.user.register.RegisterActivity;
 import com.example.monitorwise.util.Constants;
 
@@ -21,8 +26,10 @@ import java.util.List;
 public class CoursesActivity extends BaseActivity implements CoursesContract.View {
 
     private ActivityCoursesBinding mBinding;
-    private CoursesContract.ViewModel viewModel;
-    private CoursesContract.Repository repository;
+    //private CoursesContract.ViewModel viewModel;
+    //private CoursesContract.Repository repository;
+    private String courseData;
+
 
     List<Course> courseName = new ArrayList<>();
 
@@ -43,20 +50,35 @@ public class CoursesActivity extends BaseActivity implements CoursesContract.Vie
         adapter = new CoursesAdapter(populateItems());
         mBinding.rvListCourse.setAdapter(adapter);
 
-        adapter.setOnClickListener(new CoursesAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(String courseName) {
-                Intent intent = new Intent(CoursesActivity.this, RegisterActivity.class);
-                intent.putExtra(Constants.COURSE_KEY, courseName);
-                startActivityForResult(intent, Constants.COURSE_CODE);
-                finish();
-            }
-        });
+        adapter.setOnClickListener(this::showAlertDialog);
+    }
+
+    private void showAlertDialog(String courseName) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Você escolheu o curso: " + courseName + ".")
+                .setPositiveButton(R.string.confirm, (dialog, id) -> {
+                    saveCourseData(courseName);
+                })
+                .setNegativeButton(R.string.cancelar, (dialog, id) -> {
+                });
+        builder.create().show();
+    }
+
+    private void saveCourseData(String courseName) {
+        SharedPreferences.Editor editor = CoursesActivity.this.getSharedPreferences(Constants.REGISTER_SHARED_NAME, Context.MODE_PRIVATE).edit();
+
+        editor.putString(Constants.REGISTER_COURSE_KEY, courseName).apply();
+        goToRegister();
+    }
+
+    private void goToRegister() {
+        startActivity(new Intent(this, RegisterActivity.class));
+        finish();
     }
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this, "Escolhe o curso seu arrombado", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     private List<Course> populateItems() {

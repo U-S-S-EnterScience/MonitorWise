@@ -18,21 +18,32 @@
         android:background="@color/white">
 
         <EditText
-            android:id="@+id/edt_login_register"
+            android:id="@+id/edt_full_name"
             style="@style/edit_text_login_fields"
             android:layout_marginTop="@dimen/margin_big"
+            android:hint="@string/full_name"
+            android:inputType="textCapWords"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edt_login_register"
+            style="@style/edit_text_login_fields"
+            android:layout_marginTop="@dimen/margin_default_minimum"
             android:layout_marginBottom="@dimen/margin_large"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/edt_full_name" />
 
 
         <LinearLayout
             android:id="@+id/linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_default"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,6 +73,7 @@
             android:layout_marginTop="@dimen/margin_big"
             android:hint="@string/key"
             android:inputType="text"
+            android:textAllCaps="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linear_layout" />

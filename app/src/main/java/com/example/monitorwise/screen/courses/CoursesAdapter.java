@@ -1,5 +1,6 @@
 package com.example.monitorwise.screen.courses;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,6 @@ import java.util.List;
  * created by Lucas Mosca on 09/11/2021.
  */
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CoursesViewHolder> {
-    // o adapter espera uma lista de dados prontos (fatecCourses)
 
     private OnItemClickListener clickListener;
     private final List<Course> fatecCourses;
@@ -33,6 +33,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CoursesV
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         return new CoursesViewHolder(inflater.inflate(R.layout.course_item, parent, false));
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull CoursesViewHolder holder, int position) {
@@ -59,24 +60,18 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CoursesV
             super(itemView);
             mBinding = DataBindingUtil.bind(itemView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    clickListener.onItemClick(courseName);
-                }
-            });
+            itemView.setOnClickListener(view -> clickListener.onItemClick(courseName));
         }
+
 
         void bind(String courseName) {
             this.courseName = courseName;
         }
 
-
         public CourseItemBinding getmBinding() {
             return mBinding;
         }
     }
-
 
     interface OnItemClickListener {
         void onItemClick(String courseName);

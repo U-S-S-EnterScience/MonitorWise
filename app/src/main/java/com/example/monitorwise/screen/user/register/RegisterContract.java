@@ -20,6 +20,8 @@ public interface RegisterContract {
         String getClassName();
 
         String getCourse();
+
+        String getFullName();
     }
 
     interface ViewModel extends BaseContract.ViewModel {

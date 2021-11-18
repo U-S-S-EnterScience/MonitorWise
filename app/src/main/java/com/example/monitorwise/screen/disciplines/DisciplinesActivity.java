@@ -3,10 +3,11 @@ package com.example.monitorwise.screen.disciplines;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.monitorwise.R;
@@ -16,20 +17,16 @@ import com.example.monitorwise.model.domain.discipline.Discipline;
 import com.example.monitorwise.screen.user.register.RegisterActivity;
 import com.example.monitorwise.util.Constants;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DisciplinesActivity extends BaseActivity implements DisciplinesContract.View {
 
     private ActivityDisciplinesBinding mBinding;
-    private DisciplinesContract.ViewModel viewModel;
-    private DisciplinesContract.Repository repository;
-
-    private int i = 0x00;
+    //private DisciplinesContract.ViewModel viewModel;
+    //private DisciplinesContract.Repository repository;
 
     List<Discipline> disciplines = new ArrayList<>();
-    List<String> disciplinesSend = new ArrayList<String>();
 
     DisciplinesAdapter adapter = new DisciplinesAdapter(disciplines);
 
@@ -47,18 +44,31 @@ public class DisciplinesActivity extends BaseActivity implements DisciplinesCont
         adapter = new DisciplinesAdapter(populateItems());
         mBinding.rvListDiscipline.setAdapter(adapter);
 
-        adapter.setOnClickListener(new DisciplinesAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(String discipline) {
-                disciplinesSend.add(discipline);
-                if (disciplinesSend.size() == 2) {
-                    Intent intent = new Intent(DisciplinesActivity.this, RegisterActivity.class);
-                    intent.putExtra(Constants.DISCIPLINE_KEY, (Serializable) disciplinesSend);
-                    startActivityForResult(intent, Constants.DISCIPLINES_CODE);
-                }
-            }
-        });
+        adapter.setOnClickListener(this::showAlertDialog);
 
+    }
+
+    private void saveDisciplineData(String discipline) {
+        SharedPreferences.Editor editor = DisciplinesActivity.this.getSharedPreferences(Constants.REGISTER_SHARED_NAME, Context.MODE_PRIVATE).edit();
+        editor.putString(Constants.REGISTER_DISCIPLINE_KEY, discipline).apply();
+        goToRegister();
+    }
+
+    private void showAlertDialog(String discipline) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Você escolheu a disciplina: " + discipline + ".")
+                .setPositiveButton(R.string.confirm, (dialog, id) -> {
+                    saveDisciplineData(discipline);
+                })
+                .setNegativeButton(R.string.cancelar, (dialog, id) -> {
+                });
+        builder.create().show();
+
+    }
+
+    private void goToRegister() {
+        startActivity(new Intent(this, RegisterActivity.class));
+        finish();
     }
 
     private List<Discipline> populateItems() {
@@ -73,5 +83,10 @@ public class DisciplinesActivity extends BaseActivity implements DisciplinesCont
         fatecDisciplines.add(new Discipline("Linguagem de Programação"));
 
         return fatecDisciplines;
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

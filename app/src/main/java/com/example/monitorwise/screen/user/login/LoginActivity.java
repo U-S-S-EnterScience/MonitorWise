@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -16,8 +18,10 @@ import android.widget.Toast;
 import com.example.monitorwise.R;
 import com.example.monitorwise.base.BaseActivity;
 import com.example.monitorwise.databinding.ActivityLoginBinding;
+import com.example.monitorwise.screen.courses.CoursesActivity;
 import com.example.monitorwise.screen.home.HomeActivity;
 import com.example.monitorwise.screen.user.register.RegisterActivity;
+import com.example.monitorwise.util.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -57,6 +61,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         mUserLoginFieldsBinding.progressBar.setVisibility(android.view.View.INVISIBLE);
     }
 
+    private void resetData() {
+        SharedPreferences.Editor editor = LoginActivity.this.getSharedPreferences(Constants.REGISTER_SHARED_NAME, Context.MODE_PRIVATE).edit();
+        editor.putString(Constants.REGISTER_DISCIPLINE_KEY, "Disciplinas que deseja ministrar");
+        editor.putString(Constants.REGISTER_COURSE_KEY, "Escolha seu curso").apply();
+    }
 
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
@@ -121,6 +130,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 break;
 
             case R.id.btn_sign_up:
+                resetData();
                 startActivity(new Intent(this, RegisterActivity.class));
                 break;
 
@@ -131,13 +141,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public String getEmail() {
-        return mBinding.includeContentLogin != null ?
-                mBinding.includeContentLogin.editTextLogin.getText().toString() : "";
+        return mBinding.includeContentLogin.editTextLogin.getText().toString();
     }
 
     @Override
     public String getPassword() {
-        return mBinding.includeContentLogin != null ?
-                mBinding.includeContentLogin.editTextPassword.getText().toString() : "";
+        return mBinding.includeContentLogin.editTextPassword.getText().toString();
     }
 }
