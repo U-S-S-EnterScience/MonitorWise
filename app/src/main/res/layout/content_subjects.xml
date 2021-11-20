@@ -28,6 +28,5 @@
             android:layout_marginTop="@dimen/margin_default"
             android:backgroundTint="@android:color/transparent"
             android:hint="@string/example" />
-
     </LinearLayout>
 </layout>
