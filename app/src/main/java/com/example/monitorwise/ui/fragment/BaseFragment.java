@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 public class BaseFragment extends Fragment {
 
     protected ViewDataBinding bindView(LayoutInflater layoutInflater, int layoutId,
-                                       @Nullable ViewGroup parent, boolean attachToParent){
+                                       @Nullable ViewGroup parent, boolean attachToParent) {
         return DataBindingUtil.inflate(layoutInflater, layoutId, parent, attachToParent);
     }
 

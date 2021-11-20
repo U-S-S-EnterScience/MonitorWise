@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -47,6 +49,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         mAuth = FirebaseAuth.getInstance();
 
+        // Neste método deve puxar todas as informações do usuário para salvar no banco local
+        setUserData();
+
         getSupportFragmentManager().beginTransaction().add(R.id.container, CalendarFragment.newInstance()).commit();
 
         this.setUpAppBarToolbar(mBinding.includeToolbar.toolbar, mBinding.includeToolbar.appbar);
@@ -61,6 +66,17 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         });
 
         initNavigationBottom();
+    }
+
+    private void setUserData() {
+        SharedPreferences.Editor editor = HomeActivity.this.getSharedPreferences(Constants.USER_SHARED_NAME, Context.MODE_PRIVATE).edit();
+        editor.putString(Constants.USER_NAME_KEY, "Nome do Usuário ");
+        editor.putString(Constants.USER_EMAIL_KEY, "Email do Usuário ");
+        editor.putString(Constants.USER_COURSE_KEY, "Curso do Usuário");
+        editor.putString(Constants.USER_DISCIPLINE_KEY, "Disciplina do Usuário");
+        editor.putString(Constants.USER_PERIOD_KEY, "Período do usuário");
+        editor.putString(Constants.USER_USER_ACTION_KEY, "Chave de ativação do usuário");
+        editor.apply();
     }
 
 

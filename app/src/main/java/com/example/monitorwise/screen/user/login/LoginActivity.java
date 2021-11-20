@@ -1,6 +1,5 @@
 package com.example.monitorwise.screen.user.login;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 
 import android.annotation.SuppressLint;
@@ -18,13 +17,9 @@ import android.widget.Toast;
 import com.example.monitorwise.R;
 import com.example.monitorwise.base.BaseActivity;
 import com.example.monitorwise.databinding.ActivityLoginBinding;
-import com.example.monitorwise.screen.courses.CoursesActivity;
 import com.example.monitorwise.screen.home.HomeActivity;
 import com.example.monitorwise.screen.user.register.RegisterActivity;
 import com.example.monitorwise.util.Constants;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -98,24 +93,21 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                     mUserLoginFieldsBinding.btnLogin.setVisibility(View.INVISIBLE);
                     mUserLoginFieldsBinding.progressBar.setVisibility(View.VISIBLE);
                     mAuth.signInWithEmailAndPassword(getEmail(), getPassword())
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        startActivity(new Intent(
-                                                LoginActivity.this,
-                                                HomeActivity.class)
-                                        );
-                                        finish();
-                                    } else {
-                                        String error = task.getException().getMessage();
-                                        Toast.makeText(
-                                                LoginActivity.this,
-                                                "" + error,
-                                                Toast.LENGTH_SHORT).show();
-                                        mUserLoginFieldsBinding.progressBar.setVisibility(View.INVISIBLE);
-                                        mUserLoginFieldsBinding.btnLogin.setVisibility(View.VISIBLE);
-                                    }
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    startActivity(new Intent(
+                                            LoginActivity.this,
+                                            HomeActivity.class)
+                                    );
+                                    finish();
+                                } else {
+                                    String error = task.getException().getMessage();
+                                    Toast.makeText(
+                                            LoginActivity.this,
+                                            "" + error,
+                                            Toast.LENGTH_SHORT).show();
+                                    mUserLoginFieldsBinding.progressBar.setVisibility(View.INVISIBLE);
+                                    mUserLoginFieldsBinding.btnLogin.setVisibility(View.VISIBLE);
                                 }
                             });
 
