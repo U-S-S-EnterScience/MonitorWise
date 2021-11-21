@@ -177,6 +177,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     public void registerUser() {
         Account account = new Account(
+                getFullName(),
                 getEmail(),
                 getValidateKey(),
                 turn,
@@ -250,6 +251,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     public boolean validateClick() {
         return !getCourse().equals("Escolha seu curso")
                 && !getClassName().equals("Disciplinas que deseja ministrar")
+                && !TextUtils.isEmpty(getFullName())
                 && !TextUtils.isEmpty(getEmail())
                 && !TextUtils.isEmpty(getPassword())
                 && !TextUtils.isEmpty(getPasswordAgain())

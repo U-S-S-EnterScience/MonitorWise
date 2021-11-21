@@ -97,13 +97,13 @@ public class MonitorFragment extends BaseFragment implements MonitorContract.Vie
     private List<Discipline> populateItems() {
         List<Discipline> monitorDisciplines = new ArrayList<>();
 
-        monitorDisciplines.add(new Discipline("Algoritmo", "Segunda-Feira a Sexta-Feira", "link da sala do teams", "17:40 - 19:00"));
+        //monitorDisciplines.add(new Discipline("Algoritmo", "Segunda-Feira a Sexta-Feira", "link da sala do teams", "17:40 - 19:00"));
 
         return monitorDisciplines;
     }
 
     private void fetchUserData() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.USER_SHARED_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(Constants.USER_SHARED_NAME, Context.MODE_PRIVATE);
         userName = sharedPreferences.getString(Constants.USER_NAME_KEY, "");
         userDiscipline = sharedPreferences.getString(Constants.USER_DISCIPLINE_KEY, "");
     }

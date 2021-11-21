@@ -74,13 +74,11 @@ public class DisciplinesActivity extends BaseActivity implements DisciplinesCont
     private List<Discipline> populateItems() {
         List<Discipline> fatecDisciplines = new ArrayList<>();
 
-        fatecDisciplines.add(new Discipline("Algoritmo"));
+        fatecDisciplines.add(new Discipline("Algoritmos"));
         fatecDisciplines.add(new Discipline("Programação em Microinformática"));
-        fatecDisciplines.add(new Discipline("Arquitetura Computacional"));
+        fatecDisciplines.add(new Discipline("Inglês"));
         fatecDisciplines.add(new Discipline("Matemática Discreta"));
-        fatecDisciplines.add(new Discipline("Cálculo"));
-        fatecDisciplines.add(new Discipline("Estatística Aplicada"));
-        fatecDisciplines.add(new Discipline("Linguagem de Programação"));
+        fatecDisciplines.add(new Discipline("Simulação em Logística"));
 
         return fatecDisciplines;
     }

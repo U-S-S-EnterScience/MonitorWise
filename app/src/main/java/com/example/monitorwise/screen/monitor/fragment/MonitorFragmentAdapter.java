@@ -34,11 +34,11 @@ public class MonitorFragmentAdapter extends RecyclerView.Adapter<MonitorFragment
 
     @Override
     public void onBindViewHolder(@NonNull MonitorViewHolder holder, int position) {
-        holder.mBinding.txtMonitorItemDisciplineName.setText(disciplines.get(position).getName());
+        /*holder.mBinding.txtMonitorItemDisciplineName.setText(disciplines.get(position).getName());
         holder.mBinding.txtDays.setText(disciplines.get(position).getDate());
         holder.mBinding.txtHour.setText(disciplines.get(position).getHour());
         holder.mBinding.txtLocal.setText(disciplines.get(position).getLocal());
-        holder.bind(holder.getmBinding().txtMonitorItemDisciplineName.getText().toString());
+        holder.bind(holder.getmBinding().txtMonitorItemDisciplineName.getText().toString());*/
     }
 
     @Override

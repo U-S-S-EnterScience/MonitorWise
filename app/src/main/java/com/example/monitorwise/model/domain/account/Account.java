@@ -3,15 +3,18 @@ package com.example.monitorwise.model.domain.account;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
 public class Account {
     private String id;
+    private String fullName;
     private String email;
     private String validateKey;
     private String period;
     private String course;
     private String className;
 
-    public Account(String email, String validateKey, String period, String course, String className) {
+    public Account(String fullName, String email, String validateKey, String period, String course, String className) {
+        this.fullName = fullName;
         this.email = email;
         this.validateKey = validateKey;
         this.period = period;
@@ -28,6 +31,14 @@ public class Account {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {

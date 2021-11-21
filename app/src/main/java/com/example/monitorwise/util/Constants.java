@@ -23,6 +23,13 @@ public class Constants {
     public static final String USER_COURSE_KEY = "user_course";
     public static final String USER_DISCIPLINE_KEY = "user_discipline";
     public static final String USER_PERIOD_KEY = "user_period";
-    public static final String USER_USER_ACTION_KEY = "user_action_key";
     // User shared preferences
+
+    // Discipline shared preferences
+    public static final String DISCIPLINE_NAME = "discipline_name";
+    public static final String DISCIPLINE_URL = "discipline_url";
+    public static final String DISCIPLINE_DATE = "discipline_date";
+    public static final String DISCIPLINE_HOURS = "discipline_hours";
+
+    // Calendar shared preferences
 }
