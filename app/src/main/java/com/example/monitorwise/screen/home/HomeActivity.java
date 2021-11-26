@@ -43,13 +43,6 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     public HomeContract.ViewModel viewModel;
     private FirebaseAuth mAuth;
 
-    private Boolean mBackClicked;
-
-    private static final String CALENDAR_TAG = "calendar";
-    private static final String MONITOR_TAG = "monitor";
-    private static final String HISTORIC_TAG = "historic";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +54,6 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         mAuth = FirebaseAuth.getInstance();
 
-        // Neste método deve puxar todas as informações do usuário para salvar no banco local
         setUserData();
 
         getSupportFragmentManager().beginTransaction().add(R.id.container, CalendarFragment.newInstance()).commit();
@@ -87,7 +79,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot users : dataSnapshot.getChildren()) {
-                    if(users.getKey().equals(mAuth.getUid())) {
+                    if (users.getKey().equals(mAuth.getUid())) {
                         Account user = users.getValue(Account.class);
                         editor.putString(Constants.USER_NAME_KEY, user.getFullName());
                         editor.putString(Constants.USER_EMAIL_KEY, user.getEmail());
@@ -150,72 +142,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
             }
 
-            /*if (fragment != null && getSupportFragmentManager() != null) {
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                    if (tag.equals((getLastBackStackTag()))) {
-                        return true;
-                    }
-                    transaction.hide(getSupportFragmentManager().findFragmentByTag(getLastBackStackTag()));
-                }
-
-                if (!fragment.isAdded()) {
-                    transaction.add(R.id.container, fragment, tag);
-                } else {
-                    transaction.show(getSupportFragmentManager().findFragmentByTag(tag));
-                }
-            }*/
             return true;
         });
     }
-
-/*    @Override
-    public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-            mBackClicked = true;
-
-            getSupportFragmentManager().popBackStackImmediate();
-            selectItemNavigationBottom();
-        } else {
-            finish();
-            super.onBackPressed();
-        }
-    }*/
-
-    /*private void selectItemNavigationBottom() {
-        String tag = getLastBackStackTag();
-
-        int index;
-
-        switch (tag) {
-            case MONITOR_TAG:
-                index = R.id.menu_monitor;
-                break;
-            case HISTORIC_TAG:
-                index = R.id.menu_historic;
-                break;
-            default:
-                index = R.id.menu_calendar;
-        }
-        mBinding.navigationBottom.setSelectedItemId(index);
-    }*/
-
-    /*private String getLastBackStackTag() {
-        return getSupportFragmentManager().getBackStackEntryCount() > 0 ?
-                getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager()
-                        .getBackStackEntryCount() - 1).getName() : CALENDAR_TAG;
-    }*/
-
-    /*private Boolean hasFragment() {
-        return getSupportFragmentManager().findFragmentByTag(CALENDAR_TAG) != null;
-    }*/
-
-    /*private FragmentManager.OnBackStackChangedListener onBackStackChangedListener = () -> {
-        String lastTag = getLastBackStackTag();
-        if ((CALENDAR_TAG.equals(lastTag) || MONITOR_TAG.equals(lastTag)) && hasFragment()) {
-            viewModel.displayLocationSettingsRequest();
-        }
-    };*/
 
 }
