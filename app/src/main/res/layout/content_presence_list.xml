@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_micro"
-            android:layout_marginTop="@dimen/margin_micro"
-            android:layout_marginEnd="@dimen/margin_micro"
-            android:layout_marginBottom="@dimen/margin_micro"
+            android:layout_marginHorizontal="@dimen/margin_default"
+            android:layout_marginVertical="@dimen/margin_default"
             app:cardCornerRadius="30dp"
             app:cardElevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -24,6 +25,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_default"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -38,7 +40,9 @@
                         android:layout_marginStart="@dimen/margin_default"
                         android:layout_marginTop="@dimen/margin_micro_large"
                         android:layout_marginEnd="@dimen/margin_default"
+                        android:autofillHints="@string/search_students"
                         android:hint="@string/search_students"
+                        android:inputType="textPersonName"
                         android:textColor="@color/dark_gray"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +52,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="@dimen/margin_micro_large"
+                        android:contentDescription="@string/share"
                         android:src="@drawable/ic_baseline_search_24"
                         app:layout_constraintBottom_toBottomOf="@+id/edt_search_students"
                         app:layout_constraintEnd_toEndOf="@+id/edt_search_students"
@@ -55,16 +60,55 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ListView
+                <include
+                    android:id="@+id/include_content_carlos"
+                    layout="@layout/presence_item_carlos"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginHorizontal="@dimen/margin_micro_large"
+                    android:layout_marginTop="@dimen/margin_default" />
+
+                <include
+                    android:id="@+id/include_content_lucas"
+                    layout="@layout/presence_item_lucas"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginHorizontal="@dimen/margin_micro_large" />
+
+                <include
+                    android:id="@+id/include_content_luigi"
+                    layout="@layout/presence_item_luigi"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginHorizontal="@dimen/margin_micro_large" />
+
+                <include
+                    android:id="@+id/include_content_mateus"
+                    layout="@layout/presence_item_mateus"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginHorizontal="@dimen/margin_micro_large" />
+
+                <include
+                    android:id="@+id/include_content_vivian"
+                    layout="@layout/presence_item_vivian"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginHorizontal="@dimen/margin_micro_large" />
+
+                <!--<androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_micro_large"
                     android:layout_marginTop="@dimen/margin_default"
                     android:layout_marginEnd="@dimen/margin_micro_large"
                     android:layout_marginBottom="@dimen/margin_default"
-                    tools:visibility="visible" />
+                    tools:itemCount="5"
+                    tools:listitem="@layout/presence_list_item"
+                    tools:visibility="visible" /> -->
 
                 <Button
+                    android:id="@+id/btn_add_students"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_micro_large"

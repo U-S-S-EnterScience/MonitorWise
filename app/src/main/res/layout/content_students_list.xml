@@ -1,0 +1,153 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_student_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_student_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:visibility="gone"
+            android:elevation="8dp"
+            app:cardCornerRadius="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_student_list_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_default">
+
+                <TextView
+                    android:id="@+id/txt_student_name_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/text_size_default"
+                    android:layout_marginTop="@dimen/text_size_default"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_big"
+                    app:layout_constraintEnd_toStartOf="@+id/img_student_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Lucas Bella Vitta Mosca" />
+
+                <ImageView
+                    android:id="@+id/img_student_1"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:src="@drawable/ic_close"
+                    app:layout_constraintBottom_toBottomOf="@id/txt_student_name_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/txt_student_name_1" />
+
+
+                <TextView
+                    android:id="@+id/txt_student_name_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/text_size_default"
+                    android:layout_marginTop="@dimen/text_size_default"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_big"
+                    app:layout_constraintEnd_toStartOf="@+id/img_student_2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_student_name_1"
+                    tools:text="Lucas Bella Vitta Mosca" />
+
+                <ImageView
+                    android:id="@+id/img_student_2"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:src="@drawable/ic_close"
+                    app:layout_constraintBottom_toBottomOf="@id/txt_student_name_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/txt_student_name_2" />
+
+
+                <TextView
+                    android:id="@+id/txt_student_name_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/text_size_default"
+                    android:layout_marginTop="@dimen/text_size_default"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_big"
+                    app:layout_constraintEnd_toStartOf="@+id/img_student_3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_student_name_2"
+                    tools:text="Lucas Bella Vitta Mosca" />
+
+                <ImageView
+                    android:id="@+id/img_student_3"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:src="@drawable/ic_close"
+                    app:layout_constraintBottom_toBottomOf="@id/txt_student_name_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/txt_student_name_3" />
+
+
+                <TextView
+                    android:id="@+id/txt_student_name_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/text_size_default"
+                    android:layout_marginTop="@dimen/text_size_default"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_big"
+                    app:layout_constraintEnd_toStartOf="@+id/img_student_4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_student_name_3"
+                    tools:text="Lucas Bella Vitta Mosca" />
+
+                <ImageView
+                    android:id="@+id/img_student_4"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:src="@drawable/ic_close"
+                    app:layout_constraintBottom_toBottomOf="@id/txt_student_name_4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/txt_student_name_4" />
+
+
+                <TextView
+                    android:id="@+id/txt_student_name_5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/text_size_default"
+                    android:layout_marginTop="@dimen/text_size_default"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_big"
+                    app:layout_constraintEnd_toStartOf="@+id/img_student_5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_student_name_4"
+                    tools:text="Lucas Bella Vitta Mosca" />
+
+                <ImageView
+                    android:id="@+id/img_student_5"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:src="@drawable/ic_close"
+                    app:layout_constraintBottom_toBottomOf="@id/txt_student_name_5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/txt_student_name_5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

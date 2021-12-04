@@ -19,7 +19,7 @@
     <string name="morning">Matutino</string>
     <string name="afternoon">Vespertino</string>
     <string name="night">Noturno</string>
-    <string name="choseDiscipline">Disciplinas que deseja ministrar</string>
+    <string name="choseDiscipline">Disciplina que deseja ministrar</string>
     <string name="calendar">Agenda</string>
     <string name="historic">Histórico</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -48,4 +48,19 @@
     <string name="register_discipline_key">register_discipline</string>
     <string name="full_name">Nome completo</string>
     <string name="monitor_of">Monitor de: </string>
+    <string name="finish_monitorie">Finalizar</string>
+    <string name="share">Buscar</string>
+    <string name="lucas_name">Lucas Bella Vitta Mosca</string>
+    <string name="mateus_name">Mateus Rocha Pereira</string>
+    <string name="luigi_name">Luigi Cavalieri</string>
+    <string name="vivian_name">Vivian Magda S. P. M. de Martino</string>
+    <string name="carlos_name">Carlos Augusto Hubert</string>
+    <string name="save">salvar</string>
+    <string name="students_media">Média de Alunos</string>
+    <string name="period_monitor">Período:</string>
+    <string name="choseMonth">Selecione um Mês</string>
+    <string name="matricula">"Matrícula: "</string>
+    <string name="logout">Sair</string>
+    <string name="exit">sair</string>
+    <string name="beginMonitorie">Realizar Monitoria</string>
 </resources>

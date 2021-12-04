@@ -59,7 +59,14 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     private void resetData() {
         SharedPreferences.Editor editor = LoginActivity.this.getSharedPreferences(Constants.REGISTER_SHARED_NAME, Context.MODE_PRIVATE).edit();
         editor.putString(Constants.REGISTER_DISCIPLINE_KEY, "Disciplinas que deseja ministrar");
-        editor.putString(Constants.REGISTER_COURSE_KEY, "Escolha seu curso").apply();
+        editor.putString(Constants.REGISTER_COURSE_KEY, "Escolha seu curso");
+        editor.putString(Constants.REGISTER_NAME_KEY, "");
+        editor.putString(Constants.REGISTER_EMAIL_KEY, "");
+        editor.putString(Constants.REGISTER_PASSWORD_KEY, "");
+        editor.putString(Constants.REGISTER_PASSWORD_AGAIN_KEY, "");
+        editor.putString(Constants.REGISTER_PERIOD_KEY, "");
+        editor.putString(Constants.REGISTER_ACTIVE_KEY, "");
+        editor.apply();
     }
 
     public void onCheckboxClicked(View view) {

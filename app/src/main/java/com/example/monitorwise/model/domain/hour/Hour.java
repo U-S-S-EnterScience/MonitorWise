@@ -1,4 +1,4 @@
-package com.example.monitorwise.model.domain.discipline;
+package com.example.monitorwise.model.domain.hour;
 
 public class Hour {
     private String begin;

@@ -47,6 +47,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     //private RegisterContract.ViewModel viewModel;
     //private RegisterContract.Repository repository;
 
+
     private FirebaseAuth mAuth;
     private String turn;
 
@@ -67,32 +68,20 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         mUserRegisterBinding.includeContentCourseChoose.setListener(this);
         mUserRegisterBinding.includeContentCourseTurn.setListener(this);
         mUserRegisterBinding.includeContentDisciplineChoose.setListener(this);
-
     }
 
 
-    private void updateFields() {
-        updateDisciplinesData();
-        updateCourseData();
+    private void saveData() {
+        SharedPreferences.Editor editor = RegisterActivity.this.getSharedPreferences(Constants.REGISTER_SHARED_NAME, Context.MODE_PRIVATE).edit();
+        editor.putString(Constants.REGISTER_NAME_KEY, mBinding.includeContentUserRegister.edtFullName.getText().toString());
+        editor.putString(Constants.REGISTER_EMAIL_KEY, mBinding.includeContentUserRegister.edtLoginRegister.getText().toString());
+        editor.putString(Constants.REGISTER_ACTIVE_KEY, mBinding.includeContentUserRegister.edtActiveKeyRegister.getText().toString());
+        editor.putString(Constants.REGISTER_PASSWORD_KEY, mBinding.includeContentUserRegister.edtPasswordRegister.getText().toString());
+        editor.putString(Constants.REGISTER_PASSWORD_AGAIN_KEY, mBinding.includeContentUserRegister.edtPasswordConfirm.getText().toString());
+        editor.putString(Constants.REGISTER_PERIOD_KEY, turn);
+        editor.apply();
     }
 
-    private void updateDisciplinesData() {
-        String sValue = mBinding.includeContentUserRegister.includeContentDisciplineChoose.textViewChooseDiscipline.getText().toString();
-        String sSharedValue = "Disciplinas que deseja ministrar";
-        if (!sValue.equals(sSharedValue)) {
-            mBinding.includeContentUserRegister.includeContentDisciplineChoose.textViewChooseDiscipline.setTextColor(getResources().getColor(R.color.black));
-            mBinding.includeContentUserRegister.includeContentDisciplineChoose.viewPin.setBackgroundColor(getResources().getColor(R.color.black));
-        }
-    }
-
-    private void updateCourseData() {
-        String sValue = mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.getText().toString();
-        String sSharedValue = "Escolha seu curso";
-        if (!sValue.equals(sSharedValue)) {
-            mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.setTextColor(getResources().getColor(R.color.black));
-            mBinding.includeContentUserRegister.includeContentCourseChoose.viewPin.setBackgroundColor(getResources().getColor(R.color.black));
-        }
-    }
 
     public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
@@ -100,11 +89,11 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         switch (view.getId()) {
             case R.id.radio_button_morning:
                 if (checked)
-                    turn = "Diurno";
+                    turn = Constants.PERIOD_MORNING;
                 break;
             case R.id.radio_button_night:
                 if (checked)
-                    turn = "Noturno";
+                    turn = Constants.PERIOD_NIGHT;
                 break;
         }
 
@@ -114,7 +103,43 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         SharedPreferences sharedPreferences = RegisterActivity.this.getSharedPreferences(Constants.REGISTER_SHARED_NAME, Context.MODE_PRIVATE);
         mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.setText(sharedPreferences.getString(Constants.REGISTER_COURSE_KEY, ""));
         mBinding.includeContentUserRegister.includeContentDisciplineChoose.textViewChooseDiscipline.setText(sharedPreferences.getString(Constants.REGISTER_DISCIPLINE_KEY, ""));
-        updateFields();
+        mBinding.includeContentUserRegister.edtFullName.setText(sharedPreferences.getString(Constants.REGISTER_NAME_KEY, ""));
+        mBinding.includeContentUserRegister.edtLoginRegister.setText(sharedPreferences.getString(Constants.REGISTER_EMAIL_KEY, ""));
+        mBinding.includeContentUserRegister.edtPasswordRegister.setText(sharedPreferences.getString(Constants.REGISTER_PASSWORD_KEY, ""));
+        mBinding.includeContentUserRegister.edtPasswordConfirm.setText(sharedPreferences.getString(Constants.REGISTER_PASSWORD_AGAIN_KEY, ""));
+        mBinding.includeContentUserRegister.edtActiveKeyRegister.setText(sharedPreferences.getString(Constants.REGISTER_ACTIVE_KEY, ""));
+
+        if (!sharedPreferences.getString(Constants.REGISTER_DISCIPLINE_KEY, "").equals("Disciplinas que deseja ministrar")) {
+            mBinding.includeContentUserRegister.includeContentDisciplineChoose.textViewChooseDiscipline.setTextColor(getResources().getColor(R.color.black));
+            mBinding.includeContentUserRegister.includeContentDisciplineChoose.viewPin.setBackgroundColor(getResources().getColor(R.color.black));
+        } else {
+            mBinding.includeContentUserRegister.includeContentDisciplineChoose.textViewChooseDiscipline.setTextColor(getResources().getColor(R.color.gray));
+            mBinding.includeContentUserRegister.includeContentDisciplineChoose.viewPin.setBackgroundColor(getResources().getColor(R.color.gray));
+        }
+
+        if (!sharedPreferences.getString(Constants.REGISTER_COURSE_KEY, "").equals("Escolha seu curso")) {
+            mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.setTextColor(getResources().getColor(R.color.black));
+            mBinding.includeContentUserRegister.includeContentCourseChoose.viewPin.setBackgroundColor(getResources().getColor(R.color.black));
+        } else {
+            mBinding.includeContentUserRegister.includeContentCourseChoose.textViewChooseCourse.setTextColor(getResources().getColor(R.color.gray));
+            mBinding.includeContentUserRegister.includeContentCourseChoose.viewPin.setBackgroundColor(getResources().getColor(R.color.gray));
+        }
+
+
+        if (sharedPreferences.getString(Constants.REGISTER_PERIOD_KEY, "").equals(Constants.PERIOD_MORNING))
+            updateMorningRadio();
+        else if (sharedPreferences.getString(Constants.REGISTER_PERIOD_KEY, "").equals(Constants.PERIOD_NIGHT))
+            updateNightRadio();
+    }
+
+    private void updateNightRadio() {
+        mBinding.includeContentUserRegister.includeContentCourseTurn.radioButtonMorning.setChecked(false);
+        mBinding.includeContentUserRegister.includeContentCourseTurn.radioButtonNight.setChecked(true);
+    }
+
+    private void updateMorningRadio() {
+        mBinding.includeContentUserRegister.includeContentCourseTurn.radioButtonMorning.setChecked(true);
+        mBinding.includeContentUserRegister.includeContentCourseTurn.radioButtonNight.setChecked(false);
     }
 
     public void onCheckboxClicked(View view) {
@@ -127,11 +152,6 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 hidePassword();
     }
 
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    public void initializeComponents() {
-
-    }
 
     private void showPassword() {
         mUserRegisterBinding.checkBoxShowPasswordRegister.setChecked(true);
@@ -164,12 +184,14 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     }
 
     private void goToDisciplineActivity() {
+        saveData();
         startActivity(new Intent(this, DisciplinesActivity.class));
         finish();
     }
 
 
     private void goToCoursesActivity() {
+        saveData();
         startActivity(new Intent(this, CoursesActivity.class));
         finish();
     }
@@ -256,6 +278,12 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 && !TextUtils.isEmpty(getPassword())
                 && !TextUtils.isEmpty(getPasswordAgain())
                 && !TextUtils.isEmpty(getValidateKey());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
     }
 
     @Override

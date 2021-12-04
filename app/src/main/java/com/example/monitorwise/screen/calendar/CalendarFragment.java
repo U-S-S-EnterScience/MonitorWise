@@ -12,27 +12,19 @@ import android.view.ViewGroup;
 
 import com.example.monitorwise.R;
 import com.example.monitorwise.databinding.FragmentCalendarBinding;
-import com.example.monitorwise.model.domain.account.Account;
-import com.example.monitorwise.model.domain.discipline.Discipline;
-import com.example.monitorwise.model.domain.discipline.Hour;
+import com.example.monitorwise.model.domain.hour.Hour;
 import com.example.monitorwise.ui.fragment.BaseFragment;
-import com.example.monitorwise.util.Constants;
-import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class CalendarFragment extends BaseFragment implements CalendarContract {
@@ -65,8 +57,8 @@ public class CalendarFragment extends BaseFragment implements CalendarContract {
 
     private void onInitView() {
         mAuth = FirebaseAuth.getInstance();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBinding.getRoot().getContext(), LinearLayoutManager.VERTICAL, false);
-        setUserData();
+        mBinding.includeContentImageTop.txtFragmentTitle.setText("Calendário");
+        //setUserData();
     }
 
     @Override
@@ -75,7 +67,7 @@ public class CalendarFragment extends BaseFragment implements CalendarContract {
         mBinding = null;
     }
 
-    public void setUserData() {
+    /*public void setUserData() {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("disciplines").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -102,5 +94,5 @@ public class CalendarFragment extends BaseFragment implements CalendarContract {
                 }
             }
         });
-    }
+    }*/
 }
